@@ -1,0 +1,14 @@
+README.md
+  h_1509d0f93d79e0 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "824e46ad740d31224451de9f0b44c312d6f9c2fa",
+  "prompts": {},
+  "humans": {
+    "h_1509d0f93d79e0": {
+      "author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
