@@ -1,0 +1,19 @@
+README.md
+  s_4300de7526644e::t_e7b9ff5bd34b09 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "b91f219778b73afc982ac6bebeb13ebadeb28f7b",
+  "prompts": {},
+  "sessions": {
+    "s_4300de7526644e": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "ca3cb48f-0992-4676-8970-b59100449de9",
+        "model": "default"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
