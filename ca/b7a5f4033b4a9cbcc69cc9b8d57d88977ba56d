@@ -1,0 +1,19 @@
+.gitignore
+  s_71ce33e93fce36::t_63a84a0d8b8ee1 10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "cab7a5f4033b4a9cbcc69cc9b8d57d88977ba56d",
+  "prompts": {},
+  "sessions": {
+    "s_71ce33e93fce36": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a04986-1eb5-7fd3-bbd7-a64d03b911bc",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
