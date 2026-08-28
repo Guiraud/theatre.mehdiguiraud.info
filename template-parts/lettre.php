@@ -39,7 +39,7 @@ $refoulement_form_id = refoulement_sanitize_brevo_form_id( refoulement_reglage( 
 $refoulement_natif   = '';
 
 if ( 0 !== $refoulement_form_id && shortcode_exists( 'sibwp_form' ) ) {
-	$refoulement_natif = trim( do_shortcode( sprintf( '[sibwp_form id=%d]', $refoulement_form_id ) ) );
+	$refoulement_natif = refoulement_accessibiliser_formulaire_brevo( trim( do_shortcode( sprintf( '[sibwp_form id=%d]', $refoulement_form_id ) ) ) );
 }
 
 $refoulement_action  = (string) refoulement_reglage( 'refoulement_lettre_action' );
