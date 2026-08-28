@@ -1022,6 +1022,15 @@ p {
    formulaire du plugin : on cadre le bloc et on aligne champs et bouton sur la
    charte du bandeau, sans toucher à sa structure interne. */
 
+/* Le formulaire natif est un bloc vertical multi-champs, pas la paire champ +
+   bouton en ligne du formulaire générique : le bandeau passe en colonne. */
+.lettre__interieur--natif {
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	gap: 20px;
+}
+
 .lettre__formulaire--brevo {
 	display: block;
 	width: 100%;

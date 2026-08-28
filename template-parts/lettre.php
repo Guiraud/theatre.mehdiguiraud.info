@@ -52,8 +52,17 @@ if ( '' === $refoulement_formulaire && '' === $refoulement_natif && '' === $refo
 <aside class="lettre" aria-labelledby="lettre-titre">
 	<?php
 	$refoulement_iframe_seule = '' === $refoulement_formulaire && '' === $refoulement_natif && '' !== $refoulement_brevo;
+	$refoulement_natif_seul   = '' === $refoulement_formulaire && '' !== $refoulement_natif;
+
+	$refoulement_variante = '';
+
+	if ( $refoulement_iframe_seule ) {
+		$refoulement_variante = ' lettre__interieur--brevo';
+	} elseif ( $refoulement_natif_seul ) {
+		$refoulement_variante = ' lettre__interieur--natif';
+	}
 	?>
-	<div class="lettre__interieur<?php echo $refoulement_iframe_seule ? ' lettre__interieur--brevo' : ''; ?>">
+	<div class="lettre__interieur<?php echo esc_attr( $refoulement_variante ); ?>">
 		<h2 id="lettre-titre" class="lettre__titre<?php echo $refoulement_iframe_seule ? ' ecran-lecteur' : ''; ?>"><?php echo esc_html( $refoulement_titre ); ?></h2>
 
 		<?php if ( '' !== $refoulement_formulaire ) : ?>
