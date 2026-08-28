@@ -1,0 +1,31 @@
+template-parts/lettre.php
+  s_71ce33e93fce36::t_0354fcb1f929a3 42
+inc/newsletter.php
+  s_71ce33e93fce36::t_0354fcb1f929a3 1-114,118-119,123-222,227-266
+  s_71ce33e93fce36::t_aa8076d4c32ee9 115-117,120-122,223-226
+functions.php
+  s_71ce33e93fce36::t_0354fcb1f929a3 21
+tests/test-newsletter-embed.php
+  s_71ce33e93fce36::t_c68968095e0262 175-180
+  s_71ce33e93fce36::t_211dc45e663263 82-84
+  s_71ce33e93fce36::t_f80c373dc7a35a 150-169,181
+  s_71ce33e93fce36::t_8ca76b726083ca 104-111,170-174
+  s_71ce33e93fce36::t_13d3d98a42454e 204
+  s_71ce33e93fce36::t_0cd805aed696ea 85
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "6a49dc844875f39d7a3901ebaa7d2a7ce56af0a8",
+  "prompts": {},
+  "sessions": {
+    "s_71ce33e93fce36": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a04986-1eb5-7fd3-bbd7-a64d03b911bc",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
