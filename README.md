@@ -98,14 +98,32 @@ Apparence → Personnaliser → **Le Refoulement de Freud** :
 - *Couverture d'accueil* : numéro de dossier, état, titre coupé par la déchirure
   (partie rouge / partie papier), chapô, deux boutons, compteurs (`valeur|libellé`,
   une par ligne, trois au plus), deux découpes et leur légende.
-- *Recevoir les pièces* : le thème ne traite aucune inscription. Renseigner l'adresse
-  publique du formulaire intégré Brevo (`src` du code iframe), renseigner une adresse
-  de traitement fournie par un autre service d'envoi, ou brancher une extension via le
-  filtre `refoulement_lettre_formulaire`. Les URL Brevo sont limitées à HTTPS sur
-  `sibforms.com`. Sans formulaire, le bandeau propose un lien de contact ; sans adresse
-  de contact non plus, il ne s'affiche pas. L'iframe porte la classe `no-lazyload`,
-  mot-clé d'exclusion de Smush : sans elle, le chargement différé remplace `src` par un
-  SVG transparent qu'il ne restaure jamais et le bandeau reste vide.
+- *Recevoir les pièces* : le thème ne traite aucune inscription, il délègue. Cinq
+  sources, par ordre de priorité :
+
+  1. le filtre `refoulement_lettre_formulaire`, pour brancher une extension ;
+  2. **l'identifiant d'un formulaire du plugin Brevo** (Brevo → Formulaires) : le
+     formulaire est rendu dans la page par le shortcode `sibwp_form` et habillé par
+     le thème. Demande une clé API enregistrée dans le plugin — sans elle le
+     shortcode n'existe pas. Le thème ne rend jamais un shortcode saisi à la main :
+     il valide un entier positif et construit `[sibwp_form id=N]` lui-même ;
+  3. l'adresse publique du formulaire intégré Brevo (`src` du code iframe), limitée
+     à HTTPS sur `sibforms.com` ;
+  4. une adresse de traitement fournie par un autre service d'envoi ;
+  5. repli : lien de contact par courriel. Sans adresse de contact non plus, le
+     bandeau ne s'affiche pas.
+
+  Les cas 2 et 3 sont complémentaires : si la clé API manque ou si l'identifiant
+  désigne un formulaire inexistant, le thème retombe seul sur l'iframe. Garder les
+  deux réglages renseignés donne un filet de sécurité.
+
+  L'iframe porte la classe `no-lazyload`, mot-clé d'exclusion de Smush : sans elle,
+  le chargement différé remplace `src` par un SVG transparent qu'il ne restaure
+  jamais et le bandeau reste vide.
+
+  L'apparence fine du formulaire natif (textes, champs, messages) se règle dans
+  l'éditeur de formulaire de Brevo ; le thème ne cadre que le bloc, les champs et le
+  bouton pour les accorder au bandeau noir.
 
 Menus : *principal* (bandeau noir) et *pied*.
 

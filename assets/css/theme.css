@@ -1018,6 +1018,76 @@ p {
 	background: var(--tirage);
 }
 
+/* Formulaire natif rendu par le plugin Brevo. Le balisage vient de l'éditeur de
+   formulaire du plugin : on cadre le bloc et on aligne champs et bouton sur la
+   charte du bandeau, sans toucher à sa structure interne. */
+
+.lettre__formulaire--brevo {
+	display: block;
+	width: 100%;
+	max-width: 540px;
+}
+
+.lettre__formulaire--brevo .sib_signup_form,
+.lettre__formulaire--brevo form {
+	margin: 0;
+	padding: 0;
+	background: transparent;
+}
+
+.lettre__formulaire--brevo p,
+.lettre__formulaire--brevo label,
+.lettre__formulaire--brevo h1,
+.lettre__formulaire--brevo h2,
+.lettre__formulaire--brevo h3 {
+	color: var(--tirage);
+	font-family: var(--f-corps);
+}
+
+.lettre__formulaire--brevo input[type="text"],
+.lettre__formulaire--brevo input[type="email"],
+.lettre__formulaire--brevo input[type="tel"],
+.lettre__formulaire--brevo select {
+	width: 100%;
+	max-width: 100%;
+	padding: 13px 15px;
+	background: transparent;
+	border: 1px solid rgba(242, 239, 232, .4);
+	color: var(--tirage);
+	font: 400 14px/1.15 var(--f-corps);
+}
+
+.lettre__formulaire--brevo input::placeholder {
+	color: rgba(242, 239, 232, .55);
+}
+
+.lettre__formulaire--brevo input[type="submit"],
+.lettre__formulaire--brevo button[type="submit"] {
+	display: inline-block;
+	padding: 15px 26px;
+	background: var(--rouge-dossier);
+	border: 1px solid transparent;
+	color: #fff;
+	font: 500 14px/1 var(--f-etiquette);
+	letter-spacing: .14em;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background-color .15s ease, color .15s ease;
+}
+
+.lettre__formulaire--brevo input[type="submit"]:hover,
+.lettre__formulaire--brevo input[type="submit"]:focus,
+.lettre__formulaire--brevo button[type="submit"]:hover,
+.lettre__formulaire--brevo button[type="submit"]:focus {
+	background: var(--rouge-texte);
+}
+
+/* Messages de confirmation et d'erreur du plugin, lisibles sur fond noir. */
+.lettre__formulaire--brevo .sib-form-message-panel,
+.lettre__formulaire--brevo .sib_msg {
+	color: var(--tirage);
+}
+
 /* 12. Navigation secondaire, pagination, commentaires --------------------- */
 
 .navigation-pieces {

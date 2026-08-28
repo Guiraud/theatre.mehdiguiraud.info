@@ -35,6 +35,20 @@ function refoulement_sanitize_brevo_embed_url( $url ) {
 }
 
 /**
+ * Accepte uniquement un identifiant de formulaire du plugin Brevo.
+ *
+ * `absint()` ne convient pas : il transformerait « -3 » en 3.
+ *
+ * @param mixed $valeur Identifiant proposé.
+ * @return int Identifiant positif, ou 0 si aucun formulaire n'est désigné.
+ */
+function refoulement_sanitize_brevo_form_id( $valeur ) {
+	$id = filter_var( $valeur, FILTER_VALIDATE_INT );
+
+	return ( false !== $id && $id > 0 ) ? $id : 0;
+}
+
+/**
  * Réglages du thème et valeurs par défaut.
  *
  * @return array<string, array{defaut:mixed, label:string, type:string, section:string, description?:string}>
@@ -131,6 +145,13 @@ function refoulement_reglages() {
 			'type'    => 'text',
 			'section' => 'refoulement_lettre',
 		),
+		'refoulement_lettre_brevo_form_id' => array(
+			'defaut'      => 0,
+			'label'       => __( 'Identifiant du formulaire du plugin Brevo', 'refoulement' ),
+			'type'        => 'brevo_form_id',
+			'section'     => 'refoulement_lettre',
+			'description' => __( 'Numéro affiché dans Brevo → Formulaires. Rend le formulaire dans la page, stylé par le thème. Nécessite une clé API renseignée dans le plugin ; sinon le thème retombe sur l’iframe ci-dessous.', 'refoulement' ),
+		),
 		'refoulement_lettre_brevo_url' => array(
 			'defaut'      => '',
 			'label'       => __( 'Adresse du formulaire intégré Brevo', 'refoulement' ),
@@ -215,6 +236,9 @@ function refoulement_customize_register( $wp_customize ) {
 			case 'brevo_url':
 				$sanitize = 'refoulement_sanitize_brevo_embed_url';
 				break;
+			case 'brevo_form_id':
+				$sanitize = 'refoulement_sanitize_brevo_form_id';
+				break;
 			case 'email':
 				$sanitize = 'sanitize_email';
 				break;
@@ -245,7 +269,12 @@ function refoulement_customize_register( $wp_customize ) {
 			'label'       => $reglage['label'],
 			'description' => isset( $reglage['description'] ) ? $reglage['description'] : '',
 			'section'     => $reglage['section'],
-			'type'        => 'textarea' === $reglage['type'] ? 'textarea' : ( in_array( $reglage['type'], array( 'url', 'brevo_url' ), true ) ? 'url' : $reglage['type'] ),
+			'type'        => match ( $reglage['type'] ) {
+				'textarea'          => 'textarea',
+				'url', 'brevo_url'  => 'url',
+				'brevo_form_id'     => 'number',
+				default             => $reglage['type'],
+			},
 		) );
 	}
 }

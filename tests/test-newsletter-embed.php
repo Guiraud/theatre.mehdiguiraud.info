@@ -61,6 +61,22 @@ function wp_kses_post( $value ) {
 	return $value;
 }
 
+$GLOBALS['refoulement_shortcodes'] = array();
+
+function shortcode_exists( $tag ) {
+	return array_key_exists( $tag, $GLOBALS['refoulement_shortcodes'] );
+}
+
+function do_shortcode( $contenu ) {
+	foreach ( $GLOBALS['refoulement_shortcodes'] as $tag => $sortie ) {
+		if ( str_starts_with( trim( $contenu ), '[' . $tag ) ) {
+			return $sortie;
+		}
+	}
+
+	return $contenu;
+}
+
 require dirname( __DIR__ ) . '/inc/customizer.php';
 
 $failures = array();
@@ -81,8 +97,9 @@ function expect_contains( $needle, $haystack, $message ) {
 	}
 }
 
-function render_newsletter( $mods ) {
+function render_newsletter( $mods, $shortcodes = array() ) {
 	$GLOBALS['refoulement_theme_mods'] = $mods;
+	$GLOBALS['refoulement_shortcodes'] = $shortcodes;
 	ob_start();
 	include dirname( __DIR__ ) . '/template-parts/lettre.php';
 	return ob_get_clean();
@@ -115,6 +132,56 @@ $invalid_markup = render_newsletter( array(
 ) );
 
 expect_same( '', trim( $invalid_markup ), 'Une URL d’intégration non Brevo ne doit rien rendre.' );
+
+// --- Formulaire natif via le plugin Brevo (shortcode) ---------------------
+
+$forme_html = '<form id="sib_signup_form_1" class="sib_signup_form"><input type="email" name="email"><button type="submit">Je m’inscris</button></form>';
+
+if ( ! function_exists( 'refoulement_sanitize_brevo_form_id' ) ) {
+	$failures[] = 'La fonction refoulement_sanitize_brevo_form_id doit exister.';
+} else {
+	expect_same( 12, refoulement_sanitize_brevo_form_id( '12' ), 'Un identifiant numérique doit être conservé.' );
+	expect_same( 0, refoulement_sanitize_brevo_form_id( '0' ), 'Zéro ne désigne aucun formulaire.' );
+	expect_same( 0, refoulement_sanitize_brevo_form_id( '-3' ), 'Un identifiant négatif doit être refusé.' );
+	expect_same( 0, refoulement_sanitize_brevo_form_id( 'abc' ), 'Un identifiant non numérique doit être refusé.' );
+	expect_same( 0, refoulement_sanitize_brevo_form_id( '' ), 'Une valeur vide doit être refusée.' );
+}
+
+$markup_shortcode = render_newsletter(
+	array(
+		'refoulement_lettre_brevo_form_id' => 3,
+		'refoulement_lettre_brevo_url'     => $valid_url,
+	),
+	array( 'sibwp_form' => $forme_html )
+);
+
+expect_contains( 'lettre__formulaire--brevo', $markup_shortcode, 'Le formulaire natif doit porter sa classe de mise en page.' );
+expect_contains( 'sib_signup_form', $markup_shortcode, 'Le balisage du plugin Brevo doit être rendu tel quel.' );
+expect_contains( '<h2 id="lettre-titre" class="lettre__titre"', $markup_shortcode, 'Le titre reste visible : le formulaire natif ne porte pas le sien.' );
+
+if ( false !== strpos( $markup_shortcode, '<iframe' ) ) {
+	$failures[] = 'Le formulaire natif doit avoir la priorité sur l’iframe.';
+}
+
+$markup_sans_plugin = render_newsletter(
+	array(
+		'refoulement_lettre_brevo_form_id' => 3,
+		'refoulement_lettre_brevo_url'     => $valid_url,
+	),
+	array()
+);
+
+expect_contains( 'class="lettre__iframe no-lazyload"', $markup_sans_plugin, 'Sans clé API le shortcode n’existe pas : repli sur l’iframe.' );
+
+$markup_forme_absente = render_newsletter(
+	array(
+		'refoulement_lettre_brevo_form_id' => 99,
+		'refoulement_lettre_brevo_url'     => $valid_url,
+	),
+	array( 'sibwp_form' => '' )
+);
+
+expect_contains( 'class="lettre__iframe no-lazyload"', $markup_forme_absente, 'Un identifiant de formulaire inconnu rend une chaîne vide : repli sur l’iframe.' );
 
 if ( $failures ) {
 	fwrite( STDERR, "ÉCHEC\n- " . implode( "\n- ", $failures ) . "\n" );

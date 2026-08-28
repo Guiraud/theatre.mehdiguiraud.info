@@ -3,11 +3,16 @@
  * Bandeau « Recevoir les pièces ».
  *
  * Le thème ne traite aucune inscription : il fournit la maquette et délègue.
- * Quatre cas, dans l'ordre :
+ * Cinq cas, dans l'ordre :
  *   1. le filtre `refoulement_lettre_formulaire` retourne un formulaire (extension) ;
- *   2. une adresse de formulaire intégré Brevo est renseignée ;
- *   3. une adresse de traitement générique est renseignée ;
- *   4. repli : lien de contact par courriel.
+ *   2. le plugin Brevo rend un formulaire natif via son shortcode ;
+ *   3. une adresse de formulaire intégré Brevo est renseignée (iframe) ;
+ *   4. une adresse de traitement générique est renseignée ;
+ *   5. repli : lien de contact par courriel.
+ *
+ * Le shortcode `sibwp_form` n'est déclaré que si une clé API est enregistrée dans
+ * le plugin, et rend une chaîne vide si l'identifiant est inconnu. Les deux cas
+ * retombent sur l'iframe.
  *
  * L'iframe Brevo porte `no-lazyload` : Smush déplace sinon `src` vers `data-src`
  * et laisse un SVG transparent que son script ne restaure pas.
@@ -29,19 +34,33 @@ $refoulement_titre = (string) refoulement_reglage( 'refoulement_lettre_titre' );
 $refoulement_formulaire = apply_filters( 'refoulement_lettre_formulaire', '' );
 
 $refoulement_brevo   = refoulement_sanitize_brevo_embed_url( (string) refoulement_reglage( 'refoulement_lettre_brevo_url' ) );
+
+$refoulement_form_id = refoulement_sanitize_brevo_form_id( refoulement_reglage( 'refoulement_lettre_brevo_form_id' ) );
+$refoulement_natif   = '';
+
+if ( 0 !== $refoulement_form_id && shortcode_exists( 'sibwp_form' ) ) {
+	$refoulement_natif = trim( do_shortcode( sprintf( '[sibwp_form id=%d]', $refoulement_form_id ) ) );
+}
+
 $refoulement_action  = (string) refoulement_reglage( 'refoulement_lettre_action' );
 $refoulement_contact = (string) refoulement_reglage( 'refoulement_lettre_contact' );
 
-if ( '' === $refoulement_formulaire && '' === $refoulement_brevo && '' === $refoulement_action && '' === $refoulement_contact ) {
+if ( '' === $refoulement_formulaire && '' === $refoulement_natif && '' === $refoulement_brevo && '' === $refoulement_action && '' === $refoulement_contact ) {
 	return;
 }
 ?>
 <aside class="lettre" aria-labelledby="lettre-titre">
-	<div class="lettre__interieur<?php echo '' !== $refoulement_brevo ? ' lettre__interieur--brevo' : ''; ?>">
-		<h2 id="lettre-titre" class="lettre__titre<?php echo '' !== $refoulement_brevo ? ' ecran-lecteur' : ''; ?>"><?php echo esc_html( $refoulement_titre ); ?></h2>
+	<?php
+	$refoulement_iframe_seule = '' === $refoulement_formulaire && '' === $refoulement_natif && '' !== $refoulement_brevo;
+	?>
+	<div class="lettre__interieur<?php echo $refoulement_iframe_seule ? ' lettre__interieur--brevo' : ''; ?>">
+		<h2 id="lettre-titre" class="lettre__titre<?php echo $refoulement_iframe_seule ? ' ecran-lecteur' : ''; ?>"><?php echo esc_html( $refoulement_titre ); ?></h2>
 
 		<?php if ( '' !== $refoulement_formulaire ) : ?>
 			<div class="lettre__formulaire"><?php echo wp_kses_post( $refoulement_formulaire ); ?></div>
+
+		<?php elseif ( '' !== $refoulement_natif ) : ?>
+			<div class="lettre__formulaire lettre__formulaire--brevo"><?php echo $refoulement_natif; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- balisage du plugin Brevo, construit à partir d'un identifiant entier validé. ?></div>
 
 		<?php elseif ( '' !== $refoulement_brevo ) : ?>
 			<iframe
