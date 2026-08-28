@@ -1,0 +1,30 @@
+README.md
+  s_cc15eb35c6dcbc::t_4af4557b574fc2 101-126
+assets/css/theme.css
+  s_cc15eb35c6dcbc::t_d78702728134ec 1021-1090
+inc/customizer.php
+  s_cc15eb35c6dcbc::t_3a0a97ce3795ae 38-50,148-154,239-241,272-277
+  s_cc15eb35c6dcbc::t_ca5bd6329538e4 37
+tests/test-newsletter-embed.php
+  s_cc15eb35c6dcbc::t_ea15d9c6e0d734 64-79,100,102
+  s_cc15eb35c6dcbc::t_7016bdff4f9518 136-185
+template-parts/lettre.php
+  s_cc15eb35c6dcbc::t_df4070c0b85da3 6,8-15,37-44,48,53-57,62-63
+  s_cc15eb35c6dcbc::t_691235bef8bd63 64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "6c5ab7b0f47097b8b81a285aa5484d028d8517c8",
+  "prompts": {},
+  "sessions": {
+    "s_cc15eb35c6dcbc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41e8f289-df9b-4437-9551-9c099072505b",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
