@@ -1,0 +1,83 @@
+<?php
+/**
+ * Bandeau « Recevoir les pièces ».
+ *
+ * Le thème ne traite aucune inscription : il fournit la maquette et délègue.
+ * Quatre cas, dans l'ordre :
+ *   1. le filtre `refoulement_lettre_formulaire` retourne un formulaire (extension) ;
+ *   2. une adresse de formulaire intégré Brevo est renseignée ;
+ *   3. une adresse de traitement générique est renseignée ;
+ *   4. repli : lien de contact par courriel.
+ *
+ * L'iframe Brevo porte `no-lazyload` : Smush déplace sinon `src` vers `data-src`
+ * et laisse un SVG transparent que son script ne restaure pas.
+ *
+ * @package Refoulement
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$refoulement_titre = (string) refoulement_reglage( 'refoulement_lettre_titre' );
+
+/**
+ * Filtre le formulaire d'inscription du bandeau.
+ *
+ * Retourner du HTML depuis une extension court-circuite le formulaire du thème.
+ *
+ * @param string $formulaire HTML du formulaire (vide par défaut).
+ */
+$refoulement_formulaire = apply_filters( 'refoulement_lettre_formulaire', '' );
+
+$refoulement_brevo   = refoulement_sanitize_brevo_embed_url( (string) refoulement_reglage( 'refoulement_lettre_brevo_url' ) );
+$refoulement_action  = (string) refoulement_reglage( 'refoulement_lettre_action' );
+$refoulement_contact = (string) refoulement_reglage( 'refoulement_lettre_contact' );
+
+if ( '' === $refoulement_formulaire && '' === $refoulement_brevo && '' === $refoulement_action && '' === $refoulement_contact ) {
+	return;
+}
+?>
+<aside class="lettre" aria-labelledby="lettre-titre">
+	<div class="lettre__interieur<?php echo '' !== $refoulement_brevo ? ' lettre__interieur--brevo' : ''; ?>">
+		<h2 id="lettre-titre" class="lettre__titre<?php echo '' !== $refoulement_brevo ? ' ecran-lecteur' : ''; ?>"><?php echo esc_html( $refoulement_titre ); ?></h2>
+
+		<?php if ( '' !== $refoulement_formulaire ) : ?>
+			<div class="lettre__formulaire"><?php echo wp_kses_post( $refoulement_formulaire ); ?></div>
+
+		<?php elseif ( '' !== $refoulement_brevo ) : ?>
+			<iframe
+				class="lettre__iframe no-lazyload"
+				title="<?php echo esc_attr( sprintf( __( 'Formulaire d’inscription à la newsletter %s', 'refoulement' ), $refoulement_titre ) ); ?>"
+				src="<?php echo esc_url( $refoulement_brevo ); ?>"
+				width="540"
+				height="700"
+				loading="lazy"
+				referrerpolicy="strict-origin-when-cross-origin"
+				scrolling="auto"
+			></iframe>
+
+		<?php elseif ( '' !== $refoulement_action ) : ?>
+			<form class="lettre__formulaire" action="<?php echo esc_url( $refoulement_action ); ?>" method="post" target="_blank">
+				<label class="ecran-lecteur" for="lettre-adresse"><?php esc_html_e( 'Votre adresse électronique', 'refoulement' ); ?></label>
+				<input
+					id="lettre-adresse"
+					class="lettre__champ"
+					type="email"
+					name="<?php echo esc_attr( (string) refoulement_reglage( 'refoulement_lettre_champ' ) ); ?>"
+					placeholder="<?php esc_attr_e( 'votre@adresse.fr', 'refoulement' ); ?>"
+					autocomplete="email"
+					required
+				>
+				<button class="bouton bouton--rouge lettre__bouton" type="submit">
+					<?php echo esc_html( (string) refoulement_reglage( 'refoulement_lettre_bouton' ) ); ?>
+				</button>
+			</form>
+
+		<?php else : ?>
+			<p class="lettre__repli">
+				<a class="bouton bouton--rouge" href="<?php echo esc_url( 'mailto:' . $refoulement_contact . '?subject=' . rawurlencode( __( 'Recevoir les pièces', 'refoulement' ) ) ); ?>">
+					<?php esc_html_e( 'Écrire pour recevoir les pièces', 'refoulement' ); ?>
+				</a>
+			</p>
+		<?php endif; ?>
+	</div>
+</aside>

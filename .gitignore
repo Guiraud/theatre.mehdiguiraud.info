@@ -1,0 +1,9 @@
+.DS_Store
+node_modules/
+*.log
+apercu-*.html
+dist/
+
+# Artefacts d'outillage local (hors thème)
+.mcp_memory/
+.continues-handoff.md

@@ -1,0 +1,1408 @@
+/* =========================================================================
+   Le Refoulement de Freud — feuille de style du thème
+   Charte v2 (palette et typographie, planche 2e) + accueil 3a.
+
+   1.  Jetons
+   2.  Base
+   3.  Utilitaires et primitives
+   4.  Bandeau de navigation
+   5.  Couverture d'accueil (3a)
+   6.  Manchette et grille des pièces (3a)
+   7.  Pièce longue : article et manifeste (2d)
+   8.  Entretiens (1f / 1g redéclinés)
+   9.  Portrait (1h redécliné)
+   10. Contenu éditorial et compositions
+   11. Bandeau d'inscription
+   12. Navigation secondaire, pagination, commentaires
+   13. Pied de page
+   14. Adaptations petit écran (1i)
+   ========================================================================= */
+
+/* 1. Jetons --------------------------------------------------------------- */
+
+:root {
+	/* Palette — planche 2e. Les trois rouges ne sont pas interchangeables. */
+	--noir: #0B0B0C;            /* fonds, en-têtes */
+	--gris-preuve: #17181A;     /* surfaces, duotone */
+	--rouge-dossier: #B8121B;   /* aplats, boutons, filets — jamais du texte courant */
+	--rouge-texte: #8E1017;     /* texte rouge sur papier — 7,4:1 */
+	--rouge-nuit: #E0575E;      /* rouge sur noir uniquement — 5,3:1 */
+	--papier: #EAE4D8;          /* fond de lecture */
+	--papier-couverture: #DCD5C4; /* surface de couverture (accueil) */
+	--tirage: #F2EFE8;          /* texte sur noir — 16:1 */
+	--encre: #1E1C19;
+	--encre-douce: #3C3A36;
+	--encre-chapo: #26241F;
+	--gris-document: #4A4740;
+
+	--filet: rgba(11, 11, 12, .25);
+	--filet-fin: rgba(11, 11, 12, .18);
+	--filet-nuit: rgba(242, 239, 232, .16);
+
+	/* Trames */
+	--trame-papier: repeating-linear-gradient(0deg, rgba(11, 11, 12, .028) 0 1px, transparent 1px 4px);
+	--trame-facsimile: repeating-linear-gradient(180deg, #C9C2B1 0 2px, #E4DECE 2px 6px);
+
+	/* Familles */
+	--f-titre: 'Bodoni Moda', Didot, 'Times New Roman', serif;
+	--f-corps: 'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif;
+	--f-etiquette: Oswald, 'Arial Narrow', sans-serif;
+	--f-cote: 'IBM Plex Mono', ui-monospace, monospace;
+
+	/* Mesures */
+	--gouttiere: clamp(20px, 5vw, 64px);
+	--gouttiere-lecture: clamp(20px, 5vw, 72px);
+	--colonne-lecture: 680px;
+	--colonne-marge: 250px;
+	--ecart-marge: 60px;
+}
+
+/* 2. Base ----------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	background: var(--papier);
+	color: var(--encre);
+	font-family: var(--f-corps);
+	font-size: 19px;
+	line-height: 1.85;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
+
+body.surface-couverture {
+	background-color: var(--papier-couverture);
+	background-image: var(--trame-papier);
+}
+
+img,
+svg,
+video {
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	color: var(--rouge-texte);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+}
+
+a:hover,
+a:focus {
+	color: var(--noir);
+}
+
+:focus-visible {
+	outline: 2px solid var(--rouge-dossier);
+	outline-offset: 3px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--f-titre);
+	color: var(--noir);
+	line-height: 1.22;
+	margin: 0 0 .4em;
+	text-wrap: balance;
+}
+
+p {
+	margin: 0 0 1.15em;
+	text-wrap: pretty;
+}
+
+/* 3. Utilitaires et primitives -------------------------------------------- */
+
+.ecran-lecteur {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+.lien-evitement {
+	position: absolute;
+	left: -9999px;
+	z-index: 100;
+	padding: 12px 20px;
+	background: var(--noir);
+	color: var(--tirage);
+	font: 500 13px/1 var(--f-etiquette);
+	letter-spacing: .14em;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.lien-evitement:focus {
+	left: 16px;
+	top: 16px;
+}
+
+.site__contenu {
+	display: block;
+}
+
+.section {
+	padding: clamp(36px, 6vw, 56px) var(--gouttiere-lecture) clamp(44px, 7vw, 64px);
+}
+
+.section--papier {
+	background: var(--papier);
+}
+
+.colonne-lecture {
+	max-width: var(--colonne-lecture);
+}
+
+/* Cote d'archive : IBM Plex Mono, capitales espacées. */
+.cote {
+	margin: 0;
+	font: 500 12px/1.4 var(--f-cote);
+	letter-spacing: .2em;
+	text-transform: uppercase;
+	color: var(--encre-douce);
+}
+
+.cote--rouge {
+	color: var(--rouge-texte);
+}
+
+.cote--nuit {
+	color: var(--rouge-nuit);
+}
+
+.cote a {
+	color: inherit;
+}
+
+.bouton {
+	display: inline-block;
+	padding: 15px 26px;
+	border: 1px solid transparent;
+	font: 500 14px/1 var(--f-etiquette);
+	letter-spacing: .14em;
+	text-transform: uppercase;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background-color .15s ease, color .15s ease;
+}
+
+.bouton--noir {
+	background: var(--noir);
+	color: var(--papier);
+}
+
+.bouton--noir:hover,
+.bouton--noir:focus {
+	background: var(--gris-preuve);
+	color: var(--tirage);
+}
+
+.bouton--contour {
+	background: transparent;
+	border-color: var(--noir);
+	color: var(--noir);
+}
+
+.bouton--contour:hover,
+.bouton--contour:focus {
+	background: var(--noir);
+	color: var(--papier);
+}
+
+.bouton--rouge {
+	background: var(--rouge-dossier);
+	color: #fff;
+}
+
+.bouton--rouge:hover,
+.bouton--rouge:focus {
+	background: var(--rouge-texte);
+	color: #fff;
+}
+
+/* 4. Bandeau de navigation ------------------------------------------------ */
+
+.bandeau {
+	background: var(--noir);
+	color: var(--tirage);
+}
+
+.bandeau__interieur {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	padding: 20px var(--gouttiere);
+}
+
+.manchette {
+	margin: 0;
+	font: 500 13px/1 var(--f-etiquette);
+	letter-spacing: .22em;
+	text-transform: uppercase;
+}
+
+.manchette__lien {
+	color: var(--tirage);
+	text-decoration: none;
+}
+
+.manchette__lien:hover,
+.manchette__lien:focus {
+	color: var(--rouge-nuit);
+}
+
+.bandeau .custom-logo {
+	max-height: 40px;
+	width: auto;
+}
+
+.bandeau__nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 26px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.bandeau__nav a {
+	font: 400 14px/1 var(--f-etiquette);
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var(--tirage);
+	text-decoration: none;
+}
+
+.bandeau__nav a:hover,
+.bandeau__nav a:focus,
+.bandeau__nav .current-menu-item > a,
+.bandeau__nav .current_page_item > a,
+.bandeau__nav .current-menu-parent > a {
+	color: var(--rouge-nuit);
+}
+
+.bandeau__bascule {
+	display: none;
+	width: 34px;
+	height: 26px;
+	padding: 0;
+	background: none;
+	border: 0;
+	cursor: pointer;
+}
+
+.bandeau__bascule-barres,
+.bandeau__bascule-barres::before,
+.bandeau__bascule-barres::after {
+	display: block;
+	width: 26px;
+	height: 2px;
+	background: var(--tirage);
+	content: '';
+}
+
+.bandeau__bascule-barres {
+	position: relative;
+	margin: 0 auto;
+}
+
+.bandeau__bascule-barres::before {
+	position: absolute;
+	top: -7px;
+}
+
+.bandeau__bascule-barres::after {
+	position: absolute;
+	top: 7px;
+}
+
+/* 5. Couverture d'accueil (3a) -------------------------------------------- */
+
+.couverture {
+	position: relative;
+	display: grid;
+	grid-template-columns: 52% 1fr;
+	align-items: start;
+	min-height: 600px;
+	padding: 86px var(--gouttiere) 56px;
+	overflow: hidden;
+}
+
+/* Déchirure : bande rouge à bords irréguliers, tramée comme le papier. */
+.couverture__dechirure {
+	position: absolute;
+	inset: 0 auto 0 0;
+	width: 52%;
+	background-color: var(--rouge-texte);
+	background-image: repeating-linear-gradient(0deg, rgba(0, 0, 0, .05) 0 1px, transparent 1px 4px);
+	clip-path: polygon(0 0, 100% 0, 88% 12%, 97% 26%, 86% 41%, 95% 58%, 84% 72%, 93% 87%, 86% 100%, 0 100%);
+}
+
+.couverture__recto {
+	position: relative;
+	z-index: 1;
+	max-width: 470px;
+	padding-right: clamp(24px, 6vw, 90px);
+	color: var(--tirage);
+}
+
+.couverture__titre {
+	margin: 20px 0 0;
+	font-family: var(--f-titre);
+	text-transform: uppercase;
+	letter-spacing: -.02em;
+	line-height: 1;
+	color: var(--tirage);
+}
+
+/*
+ * La taille est indexée sur la largeur de fenêtre pour que le mot le plus long
+ * reste dans la déchirure : celle-ci occupe 52 % de la largeur et son bord le
+ * plus rentrant est à 86 % de cette bande.
+ */
+.couverture__titre-recto {
+	display: block;
+	font-size: clamp(40px, 4.9vw, 76px);
+	font-weight: 900;
+}
+
+/* La seconde partie du titre est imprimée sur le papier, à droite. */
+.couverture__titre-verso {
+	margin: 0;
+	font-family: var(--f-titre);
+	font-size: clamp(40px, 5.6vw, 66px);
+	font-weight: 400;
+	line-height: .98;
+	text-transform: uppercase;
+	color: var(--noir);
+}
+
+.compteurs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
+	margin: 34px 0 0;
+}
+
+.compteurs__item {
+	margin: 0;
+}
+
+.compteurs__valeur {
+	font: 400 40px/1 var(--f-titre);
+	color: var(--tirage);
+}
+
+.compteurs__libelle {
+	margin: 5px 0 0;
+	font: 400 13px/1.3 var(--f-corps);
+	color: rgba(242, 239, 232, .8);
+}
+
+.couverture__verso {
+	position: relative;
+	z-index: 1;
+	max-width: 420px;
+	margin-left: auto;
+	/* Décalage de la colonne papier sur la couverture : 120 px contre 86 px. */
+	padding-top: clamp(0px, 3vw, 34px);
+}
+
+.couverture__chapo {
+	margin: 26px 0 0;
+	font: 400 18px/1.75 var(--f-corps);
+	color: var(--encre-chapo);
+}
+
+.couverture__boutons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-top: 28px;
+}
+
+/* Découpes épinglées : deux tirages, légèrement pivotés. */
+.decoupes {
+	position: relative;
+	margin-top: 34px;
+	min-height: 150px;
+}
+
+.decoupes__piece {
+	position: absolute;
+	overflow: hidden;
+	border: 7px solid var(--tirage);
+	box-shadow: 0 8px 18px rgba(0, 0, 0, .3);
+}
+
+.decoupes__piece--1 {
+	left: 0;
+	top: 0;
+	width: 160px;
+	height: 118px;
+	background: linear-gradient(150deg, #5B5C60, var(--gris-preuve));
+	transform: rotate(-2deg);
+}
+
+.decoupes__piece--2 {
+	left: 150px;
+	top: 14px;
+	width: 150px;
+	height: 110px;
+	background: var(--trame-facsimile);
+	transform: rotate(2.5deg);
+	box-shadow: 0 8px 18px rgba(0, 0, 0, .28);
+}
+
+.decoupes__image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	/* Découpes N&B contrastées, conformément à la charte. */
+	filter: grayscale(1) contrast(1.15);
+}
+
+.decoupes__legende {
+	position: absolute;
+	left: 0;
+	bottom: -4px;
+	margin: 0;
+	font: 400 11px/1.4 var(--f-cote);
+	color: var(--encre-douce);
+	letter-spacing: normal;
+	text-transform: none;
+}
+
+/* 6. Manchette et grille des pièces (3a) ---------------------------------- */
+
+.dossier {
+	padding: 0 var(--gouttiere) clamp(32px, 5vw, 44px);
+}
+
+.manchette-dossier {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 44px 0 16px;
+	border-bottom: 3px double var(--noir);
+}
+
+.manchette-dossier__registre {
+	margin: 0;
+	font: 500 12px/1 var(--f-etiquette);
+	letter-spacing: .2em;
+	text-transform: uppercase;
+	color: var(--rouge-texte);
+}
+
+.manchette-dossier__registre a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.manchette-dossier__registre a:hover,
+.manchette-dossier__registre a:focus {
+	text-decoration: underline;
+}
+
+.grille-pieces {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.grille-pieces .piece {
+	padding: 26px;
+	border-right: 1px solid var(--filet);
+}
+
+.grille-pieces .piece:first-child {
+	padding-left: 0;
+}
+
+.grille-pieces .piece:last-child {
+	padding-right: 0;
+	border-right: 0;
+}
+
+/* En archive, la grille se poursuit sur plusieurs rangs : filets horizontaux. */
+.grille-pieces--archive {
+	margin-top: 8px;
+}
+
+.grille-pieces--archive .piece {
+	border-top: 1px solid var(--filet);
+	padding-block: 26px 30px;
+}
+
+.grille-pieces--archive .piece:nth-child(3n) {
+	border-right: 0;
+	padding-right: 0;
+}
+
+.grille-pieces--archive .piece:nth-child(3n + 1) {
+	padding-left: 0;
+}
+
+.piece__titre {
+	margin: 10px 0 0;
+	font: 700 24px/1.22 var(--f-titre);
+}
+
+.piece__lien {
+	color: var(--noir);
+	text-decoration: none;
+}
+
+.piece__lien:hover,
+.piece__lien:focus {
+	color: var(--rouge-texte);
+	text-decoration: underline;
+	text-decoration-color: var(--rouge-dossier);
+}
+
+.piece__extrait {
+	margin: 9px 0 0;
+	font: 400 16px/1.65 var(--f-corps);
+	color: var(--encre-douce);
+}
+
+.tete-archive {
+	max-width: 760px;
+	margin-bottom: clamp(28px, 4vw, 40px);
+}
+
+.tete-archive__titre {
+	margin: 14px 0 0;
+	font-size: clamp(34px, 5vw, 54px);
+	font-weight: 900;
+	line-height: 1;
+	letter-spacing: -.02em;
+	text-transform: uppercase;
+}
+
+.tete-archive__chapo {
+	margin: 16px 0 0;
+	font-size: 18px;
+	line-height: 1.7;
+	color: var(--encre-douce);
+}
+
+.tete-archive__recherche {
+	margin-top: 24px;
+}
+
+/* 7. Pièce longue : article et manifeste (2d) ----------------------------- */
+
+.entete-piece {
+	background: var(--noir);
+	color: var(--tirage);
+	padding: clamp(36px, 5vw, 56px) var(--gouttiere-lecture);
+}
+
+.entete-piece__interieur {
+	max-width: 760px;
+}
+
+.entete-piece__titre {
+	margin: 18px 0 0;
+	font-size: clamp(34px, 5.5vw, 60px);
+	font-weight: 700;
+	line-height: 1.04;
+	letter-spacing: -.02em;
+	color: var(--tirage);
+}
+
+.entete-piece__chapo {
+	margin: 20px 0 0;
+	max-width: 640px;
+	font-size: 19px;
+	line-height: 1.7;
+	color: rgba(242, 239, 232, .8);
+}
+
+.piece-longue__couverture {
+	margin: 0;
+	background: var(--noir);
+}
+
+.piece-longue__couverture img {
+	width: 100%;
+	object-fit: cover;
+	filter: grayscale(1) contrast(1.1);
+}
+
+.piece-longue__couverture figcaption {
+	padding: 10px var(--gouttiere-lecture) 16px;
+	color: rgba(242, 239, 232, .7);
+}
+
+/*
+ * Colonne de lecture de 680 px, notes rejetées dans une marge de 250 px.
+ * Le flottant suit le fil du texte, contrairement à une grille par rangs.
+ */
+.article-corps {
+	max-width: calc(var(--colonne-lecture) + var(--ecart-marge) + var(--colonne-marge));
+}
+
+.article-corps > * {
+	max-width: var(--colonne-lecture);
+}
+
+.article-corps > .note-marge {
+	float: right;
+	clear: right;
+	width: var(--colonne-marge);
+	margin: 6px 0 26px var(--ecart-marge);
+}
+
+.article-corps::after {
+	display: table;
+	clear: both;
+	content: '';
+}
+
+.piece-longue__pied {
+	margin-top: 40px;
+	padding-top: 18px;
+	border-top: 1px solid var(--filet);
+}
+
+.piece-longue__pied .cote {
+	margin-bottom: 6px;
+}
+
+/* 8. Entretiens (1f / 1g redéclinés) -------------------------------------- */
+
+.liste-entretiens {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.entretien-ligne {
+	display: grid;
+	grid-template-columns: 60px 1fr;
+	gap: 22px;
+	padding: 26px 0;
+	border-top: 1px solid var(--filet);
+}
+
+.entretien-ligne:last-child {
+	border-bottom: 1px solid var(--filet);
+}
+
+/* Les filets courent sur toute la largeur, le texte garde sa mesure. */
+.entretien-ligne__corps {
+	max-width: var(--colonne-lecture);
+}
+
+.entretien-ligne__cote {
+	font: 500 13px/1.4 var(--f-cote);
+	color: var(--rouge-texte);
+}
+
+.entretien-ligne__titre {
+	margin: 0;
+	font: 700 25px/1.3 var(--f-titre);
+}
+
+.entretien-ligne__titre a {
+	color: var(--noir);
+	text-decoration: none;
+}
+
+.entretien-ligne__titre a:hover,
+.entretien-ligne__titre a:focus {
+	color: var(--rouge-texte);
+	text-decoration: underline;
+}
+
+.entretien-ligne__citation {
+	margin: 8px 0 0;
+	font: italic 400 19px/1.5 var(--f-titre);
+	color: var(--encre-douce);
+}
+
+.entretien-ligne .cote {
+	margin-top: 10px;
+	letter-spacing: .08em;
+	text-transform: none;
+	color: var(--gris-document);
+}
+
+.citation-versee--exergue {
+	max-width: var(--colonne-lecture);
+	margin: 0 0 36px;
+	padding: 0 0 0 22px;
+	border-left: 3px solid var(--rouge-dossier);
+}
+
+/* Transcription : locuteur en marge, réponse en colonne. */
+.tour-de-parole {
+	display: grid;
+	grid-template-columns: 76px minmax(0, 600px);
+	gap: 24px;
+	margin: 0 0 26px;
+	max-width: 700px;
+}
+
+.tour-de-parole__locuteur {
+	margin: 0;
+	padding-top: 6px;
+	font: 500 11px/1.4 var(--f-cote);
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var(--rouge-texte);
+}
+
+.tour-de-parole--temoin .tour-de-parole__locuteur {
+	color: var(--gris-document);
+}
+
+.tour-de-parole__texte > :last-child {
+	margin-bottom: 0;
+}
+
+.entretien__transcription {
+	max-width: 100%;
+}
+
+/* 9. Portrait (1h redécliné) ---------------------------------------------- */
+
+.portrait__grille {
+	display: grid;
+	grid-template-columns: 380px minmax(0, 1fr);
+	gap: clamp(28px, 5vw, 56px);
+	align-items: start;
+	max-width: 1000px;
+}
+
+.portrait__image img {
+	width: 100%;
+	filter: grayscale(1) contrast(1.1);
+}
+
+.portrait__reserve {
+	display: flex;
+	align-items: flex-end;
+	min-height: 260px;
+	padding: 12px;
+	background: var(--papier-couverture);
+	border: 1px solid var(--filet);
+}
+
+.portrait__titre {
+	margin: 14px 0 22px;
+	font-size: clamp(30px, 4vw, 44px);
+	font-weight: 700;
+	line-height: 1.12;
+}
+
+/* 10. Contenu éditorial et compositions ----------------------------------- */
+
+.entry-content > * {
+	margin-bottom: 22px;
+}
+
+.entry-content h2 {
+	margin-top: 42px;
+	font-size: clamp(26px, 3vw, 32px);
+}
+
+.entry-content h3 {
+	margin-top: 34px;
+	font-size: clamp(21px, 2.4vw, 25px);
+}
+
+.entry-content ul,
+.entry-content ol {
+	padding-left: 1.2em;
+}
+
+.entry-content li {
+	margin-bottom: .4em;
+}
+
+/* Citation versée : filet rouge, Bodoni italique, attribution en cote. */
+.entry-content blockquote,
+.citation-versee {
+	margin: 32px 0;
+	padding: 6px 0 6px 22px;
+	border-left: 3px solid var(--rouge-dossier);
+	font: italic 400 26px/1.5 var(--f-titre);
+	color: var(--noir);
+}
+
+.entry-content blockquote p,
+.citation-versee p {
+	margin-bottom: 0;
+}
+
+.entry-content blockquote cite,
+.citation-versee cite {
+	display: block;
+	margin-top: 10px;
+	font: 500 11px/1.4 var(--f-cote);
+	letter-spacing: .14em;
+	text-transform: uppercase;
+	font-style: normal;
+	color: var(--rouge-texte);
+}
+
+/* Note d'apparat critique. */
+.note-marge {
+	border-top: 2px solid var(--noir);
+	padding-top: 12px;
+}
+
+.note-marge + .note-marge {
+	border-top-width: 1px;
+	border-top-color: var(--filet);
+}
+
+.note-marge__titre {
+	margin: 0;
+	font: 500 11px/1.4 var(--f-etiquette);
+	letter-spacing: .18em;
+	text-transform: uppercase;
+	color: var(--rouge-texte);
+}
+
+.note-marge__texte {
+	margin: 8px 0 0;
+	font: 400 14px/1.65 var(--f-corps);
+	color: var(--encre-douce);
+}
+
+/* Fac-similé : tirage épinglé, légèrement pivoté. */
+.fac-simile {
+	margin: 32px 0;
+	padding: 10px 10px 32px;
+	background: var(--tirage);
+	box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+	transform: rotate(-1.5deg);
+}
+
+.fac-simile img {
+	display: block;
+	width: 100%;
+	filter: grayscale(1) contrast(1.1);
+}
+
+.fac-simile figcaption {
+	margin-top: 10px;
+	font: 400 11px/1.3 var(--f-cote);
+	color: var(--encre-douce);
+}
+
+/* Calendrier du projet. */
+.calendrier {
+	margin: 32px 0;
+}
+
+.calendrier__ligne {
+	display: grid;
+	grid-template-columns: 120px 1fr;
+	gap: 18px;
+	padding: 16px 0;
+	border-top: 1px solid var(--filet);
+}
+
+.calendrier__ligne:last-child {
+	border-bottom: 1px solid var(--filet);
+}
+
+.calendrier__periode {
+	margin: 0;
+	font: 500 11px/1.5 var(--f-cote);
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var(--gris-document);
+}
+
+.calendrier__fait {
+	margin: 0;
+	font-size: 17px;
+	line-height: 1.6;
+}
+
+.wp-block-image figcaption,
+.wp-element-caption {
+	font: 400 12px/1.5 var(--f-cote);
+	color: var(--encre-douce);
+}
+
+/* 11. Bandeau d'inscription ----------------------------------------------- */
+
+.lettre {
+	background: var(--noir);
+	color: var(--tirage);
+}
+
+.lettre__interieur {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	padding: 44px var(--gouttiere);
+}
+
+.lettre__interieur--brevo {
+	justify-content: center;
+	padding-block: 28px;
+}
+
+.lettre__titre {
+	margin: 0;
+	font: 700 26px/1.2 var(--f-titre);
+	text-transform: uppercase;
+	color: var(--tirage);
+}
+
+.lettre__formulaire {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.lettre__champ {
+	width: 260px;
+	max-width: 100%;
+	padding: 13px 15px;
+	background: transparent;
+	border: 1px solid rgba(242, 239, 232, .4);
+	color: var(--tirage);
+	font: 400 14px/1.15 var(--f-corps);
+}
+
+.lettre__champ::placeholder {
+	color: rgba(242, 239, 232, .55);
+}
+
+.lettre__bouton {
+	padding: 13px 24px;
+	font-size: 13px;
+	line-height: 1.15;
+}
+
+.lettre__repli {
+	margin: 0;
+}
+
+.lettre__iframe {
+	display: block;
+	width: 100%;
+	max-width: 540px;
+	height: 700px;
+	border: 0;
+	background: var(--tirage);
+}
+
+/* 12. Navigation secondaire, pagination, commentaires --------------------- */
+
+.navigation-pieces {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 20px;
+	padding: 28px var(--gouttiere-lecture) 40px;
+	background: var(--papier);
+	border-top: 1px solid var(--filet);
+}
+
+.navigation-pieces__lien a {
+	display: block;
+	max-width: 320px;
+	font: 700 20px/1.25 var(--f-titre);
+	color: var(--noir);
+	text-decoration: none;
+}
+
+.navigation-pieces__lien a:hover,
+.navigation-pieces__lien a:focus {
+	color: var(--rouge-texte);
+}
+
+.navigation-pieces__lien .cote {
+	display: block;
+	margin-bottom: 6px;
+	color: var(--rouge-texte);
+}
+
+.navigation-pieces__lien--suivant {
+	margin-left: auto;
+	text-align: right;
+}
+
+.pagination-dossier {
+	margin-top: 36px;
+	padding-top: 20px;
+	border-top: 1px solid var(--filet);
+}
+
+.pagination-dossier .nav-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	align-items: baseline;
+	font: 500 12px/1 var(--f-etiquette);
+	letter-spacing: .16em;
+	text-transform: uppercase;
+}
+
+.pagination-dossier a,
+.pagination-dossier .current {
+	text-decoration: none;
+	color: var(--noir);
+}
+
+.pagination-dossier .current {
+	color: var(--rouge-texte);
+}
+
+.recherche {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.recherche__champ {
+	min-width: 240px;
+	padding: 13px 15px;
+	background: transparent;
+	border: 1px solid var(--filet);
+	color: var(--encre);
+	font: 400 15px/1.15 var(--f-corps);
+}
+
+.aucune-piece h1,
+.aucune-piece h2 {
+	margin: 14px 0 12px;
+	font-size: clamp(28px, 4vw, 40px);
+}
+
+.comment-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.comment-list li {
+	padding: 20px 0;
+	border-top: 1px solid var(--filet);
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+	width: 100%;
+	padding: 12px 14px;
+	background: transparent;
+	border: 1px solid var(--filet);
+	font: 400 16px/1.5 var(--f-corps);
+	color: var(--encre);
+}
+
+.comment-form .submit {
+	padding: 14px 26px;
+	background: var(--rouge-dossier);
+	border: 0;
+	color: #fff;
+	font: 500 13px/1 var(--f-etiquette);
+	letter-spacing: .14em;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+/* 13. Pied de page -------------------------------------------------------- */
+
+.pied {
+	background: var(--noir);
+	color: rgba(242, 239, 232, .8);
+	padding: clamp(36px, 5vw, 52px) var(--gouttiere) 28px;
+}
+
+.pied__interieur {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 32px;
+	padding-bottom: 24px;
+	border-bottom: 1px solid var(--filet-nuit);
+}
+
+.pied__colonne {
+	max-width: 420px;
+}
+
+.pied__manchette {
+	margin: 0 0 8px;
+	font: 500 13px/1 var(--f-etiquette);
+	letter-spacing: .22em;
+	text-transform: uppercase;
+	color: var(--tirage);
+}
+
+.pied__accroche {
+	margin: 0 0 12px;
+	font-size: 16px;
+	line-height: 1.6;
+}
+
+.pied__cote,
+.pied__mention {
+	margin: 0;
+	font: 400 11px/1.6 var(--f-cote);
+	letter-spacing: .12em;
+	text-transform: uppercase;
+	color: rgba(242, 239, 232, .55);
+}
+
+.pied__mention {
+	padding-top: 20px;
+}
+
+.menu-pied {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 18px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.menu-pied a,
+.pied a {
+	color: var(--rouge-nuit);
+	font: 400 14px/1.6 var(--f-etiquette);
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.menu-pied a:hover,
+.pied a:hover,
+.pied a:focus {
+	color: var(--tirage);
+	text-decoration: underline;
+}
+
+.widget__titre {
+	font: 500 12px/1 var(--f-etiquette);
+	letter-spacing: .2em;
+	text-transform: uppercase;
+	color: var(--tirage);
+}
+
+/* 14. Adaptations petit écran (1i) ---------------------------------------- */
+
+@media (max-width: 1100px) {
+	.grille-pieces {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.grille-pieces .piece:nth-child(2n) {
+		border-right: 0;
+		padding-right: 0;
+	}
+
+	.grille-pieces .piece:nth-child(2n + 1) {
+		padding-left: 0;
+	}
+
+	.grille-pieces--archive .piece:nth-child(3n) {
+		border-right: 1px solid var(--filet);
+	}
+
+	.grille-pieces--archive .piece:nth-child(2n) {
+		border-right: 0;
+	}
+
+	/* La marge de notes repasse dans le fil du texte. */
+	.article-corps > .note-marge {
+		float: none;
+		width: auto;
+		max-width: var(--colonne-lecture);
+		margin: 26px 0;
+	}
+
+	.portrait__grille {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 900px) {
+	/*
+	 * Registre mobile de la planche 1i : bloc sombre en tête (surtitre, titre,
+	 * chapô, bouton), puis la lecture sur papier. La déchirure passe en bord
+	 * bas, horizontale, pour rester lisible sur une colonne étroite.
+	 */
+	.couverture {
+		display: block;
+		min-height: 0;
+		padding: 0;
+	}
+
+	/* Le bloc rouge porte lui-même la déchirure, sur son bord bas. */
+	.couverture__dechirure {
+		display: none;
+	}
+
+	.couverture__recto {
+		max-width: none;
+		padding: 40px var(--gouttiere) 56px;
+		background-color: var(--rouge-texte);
+		background-image: repeating-linear-gradient(0deg, rgba(0, 0, 0, .05) 0 1px, transparent 1px 4px);
+		clip-path: polygon(0 0, 100% 0, 100% 96%, 88% 100%, 74% 95%, 60% 100%, 46% 96%, 32% 100%, 18% 95%, 6% 100%, 0 96%);
+	}
+
+	/* Pleine largeur : le titre peut retrouver l'échelle de la planche 1i. */
+	.couverture__titre-recto {
+		font-size: clamp(34px, 11vw, 46px);
+	}
+
+	.couverture__verso {
+		max-width: none;
+		margin-left: 0;
+		padding: 32px var(--gouttiere) 40px;
+	}
+
+	.couverture__chapo {
+		margin-top: 0;
+	}
+
+	.couverture__boutons .bouton {
+		flex: 1 1 220px;
+		text-align: center;
+	}
+
+	.dossier {
+		padding-inline: var(--gouttiere);
+	}
+
+	.entretien-ligne {
+		grid-template-columns: 44px 1fr;
+		gap: 16px;
+	}
+
+	.tour-de-parole {
+		grid-template-columns: 1fr;
+		gap: 6px;
+	}
+
+	.navigation-pieces__lien--suivant {
+		text-align: left;
+		margin-left: 0;
+	}
+}
+
+@media (max-width: 780px) {
+	body {
+		font-size: 17px;
+	}
+
+	.bandeau__bascule {
+		display: block;
+	}
+
+	.bandeau__interieur {
+		flex-wrap: wrap;
+	}
+
+	.bandeau__nav {
+		display: none;
+		flex-basis: 100%;
+	}
+
+	.bandeau__nav.est-ouvert {
+		display: block;
+	}
+
+	.bandeau__nav ul {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 16px;
+		padding: 18px 0 6px;
+		border-top: 1px solid var(--filet-nuit);
+		margin-top: 16px;
+	}
+
+	.grille-pieces {
+		grid-template-columns: 1fr;
+	}
+
+	.grille-pieces .piece,
+	.grille-pieces--archive .piece {
+		padding: 22px 0;
+		border-right: 0;
+		border-top: 1px solid var(--filet);
+	}
+
+	.grille-pieces .piece:first-child {
+		border-top: 0;
+	}
+
+	.decoupes__piece--2 {
+		left: 130px;
+	}
+
+	.lettre__formulaire {
+		width: 100%;
+	}
+
+	.lettre__champ {
+		flex: 1 1 200px;
+		width: auto;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: .01ms !important;
+		transition-duration: .01ms !important;
+	}
+
+	.fac-simile,
+	.decoupes__piece {
+		transform: none;
+	}
+}
+
+@media print {
+	.bandeau,
+	.lettre,
+	.pied,
+	.navigation-pieces,
+	.lien-evitement {
+		display: none;
+	}
+
+	body,
+	body.surface-couverture {
+		background: #fff;
+		color: #000;
+	}
+}

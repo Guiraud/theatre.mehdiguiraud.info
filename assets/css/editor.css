@@ -1,0 +1,101 @@
+/*
+ * Styles de l'éditeur : reprend les motifs de la charte pour que les
+ * compositions (tour de parole, note en marge, calendrier, fac-similé)
+ * ressemblent au rendu public.
+ */
+
+.editor-styles-wrapper {
+	--noir: #0B0B0C;
+	--rouge-dossier: #B8121B;
+	--rouge-texte: #8E1017;
+	--papier: #EAE4D8;
+	--tirage: #F2EFE8;
+	--encre: #1E1C19;
+	--encre-douce: #3C3A36;
+	--gris-document: #4A4740;
+	--filet: rgba(11, 11, 12, .25);
+	--f-titre: 'Bodoni Moda', Didot, serif;
+	--f-corps: 'Atkinson Hyperlegible', system-ui, sans-serif;
+	--f-etiquette: Oswald, 'Arial Narrow', sans-serif;
+	--f-cote: 'IBM Plex Mono', ui-monospace, monospace;
+
+	background: var(--papier);
+	color: var(--encre);
+	font-family: var(--f-corps);
+}
+
+.editor-styles-wrapper .tour-de-parole {
+	display: grid;
+	grid-template-columns: 76px minmax(0, 600px);
+	gap: 24px;
+	margin-bottom: 26px;
+}
+
+.editor-styles-wrapper .tour-de-parole__locuteur {
+	font: 500 11px/1.4 var(--f-cote);
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var(--rouge-texte);
+}
+
+.editor-styles-wrapper .tour-de-parole--temoin .tour-de-parole__locuteur {
+	color: var(--gris-document);
+}
+
+.editor-styles-wrapper .note-marge {
+	max-width: 250px;
+	border-top: 2px solid var(--noir);
+	padding-top: 12px;
+}
+
+.editor-styles-wrapper .note-marge__titre {
+	font: 500 11px/1.4 var(--f-etiquette);
+	letter-spacing: .18em;
+	text-transform: uppercase;
+	color: var(--rouge-texte);
+}
+
+.editor-styles-wrapper .note-marge__texte {
+	font: 400 14px/1.65 var(--f-corps);
+	color: var(--encre-douce);
+}
+
+.editor-styles-wrapper .citation-versee,
+.editor-styles-wrapper blockquote.wp-block-quote {
+	border-left: 3px solid var(--rouge-dossier);
+	padding-left: 22px;
+	font-family: var(--f-titre);
+	font-style: italic;
+}
+
+.editor-styles-wrapper .citation-versee cite,
+.editor-styles-wrapper blockquote cite {
+	display: block;
+	margin-top: 10px;
+	font: 500 11px/1.4 var(--f-cote);
+	letter-spacing: .14em;
+	text-transform: uppercase;
+	font-style: normal;
+	color: var(--rouge-texte);
+}
+
+.editor-styles-wrapper .calendrier__ligne {
+	display: grid;
+	grid-template-columns: 120px 1fr;
+	gap: 18px;
+	padding: 16px 0;
+	border-top: 1px solid var(--filet);
+}
+
+.editor-styles-wrapper .calendrier__periode {
+	font: 500 11px/1.5 var(--f-cote);
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var(--gris-document);
+}
+
+.editor-styles-wrapper .fac-simile {
+	padding: 10px 10px 32px;
+	background: var(--tirage);
+	box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+}
