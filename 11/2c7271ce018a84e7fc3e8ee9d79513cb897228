@@ -1,0 +1,147 @@
+page.php
+  s_f5ce9f8683adb0::t_cf8c7626749099 1-17,24-49
+  s_f5ce9f8683adb0::t_346e5b8802d191 18-23
+README.md
+  s_cc15eb35c6dcbc::t_43378d2dad115a 106-108
+  s_f5ce9f8683adb0::t_78a2b7f139042e 9,12-32
+  s_8d2e4b126fcfc1::t_1bc11f4e51a0d8 102-105
+  s_f5ce9f8683adb0::t_97a1177af3cf41 142
+  s_f5ce9f8683adb0::t_6b5f9c41b5daf5 2-8,10-11,33-101,109-141,143-145
+single-entretien.php
+  s_f5ce9f8683adb0::t_06dadef1945c27 1-72
+tests/test-newsletter-embed.php
+  s_8d2e4b126fcfc1::t_1584ae2f81a225 1-105,107-124
+  s_cc15eb35c6dcbc::t_672f93e95cd0d1 106
+footer.php
+  s_f5ce9f8683adb0::t_fc8cd0625ff0a3 1-55
+inc/patterns.php
+  s_f5ce9f8683adb0::t_89f0d20e635e50 1-134
+inc/post-types.php
+  s_f5ce9f8683adb0::t_d3e98a357fc19b 1-104
+inc/setup.php
+  s_f5ce9f8683adb0::t_552a4decaf9811 1-116
+theme.json
+  s_f5ce9f8683adb0::t_4a6161185ff1b9 118-138
+  s_f5ce9f8683adb0::t_73091951ddac6e 31
+  s_f5ce9f8683adb0::t_45bd9d98d02360 1-30,32-117,139-162
+template-parts/piece-carte.php
+  s_f5ce9f8683adb0::t_ae12d8e0b7e545 1-20
+inc/enqueue.php
+  s_f5ce9f8683adb0::t_9740d0bab8440d 1-98
+template-parts/bandeau-nav.php
+  s_f5ce9f8683adb0::t_f5133e7f2f7db7 1-58
+bin/fetch-fonts.py
+  s_f5ce9f8683adb0::t_b760525115b3ff 1-31,33-129,131-132
+  s_f5ce9f8683adb0::t_a052f38ba5ca90 32,130
+style.css
+  s_f5ce9f8683adb0::t_2e51dd22137d93 1-8,10-20
+  s_f5ce9f8683adb0::t_74210426b7f283 9
+index.php
+  s_f5ce9f8683adb0::t_a8412d9951380b 1-58
+inc/template-tags.php
+  s_f5ce9f8683adb0::t_8de1055f48a116 1-204,207-227
+  s_f5ce9f8683adb0::t_4935e66fd89713 205-206
+template-parts/lettre.php
+  s_cc15eb35c6dcbc::t_7aeba2d229dbda 12-14
+  s_f5ce9f8683adb0::t_5f3c10808b4ff7 1-5,7,11,15-30,32-34,36-39,42-44,57-83
+  s_cc15eb35c6dcbc::t_85f3832c8e551c 48
+  s_8d2e4b126fcfc1::t_1bc11f4e51a0d8 6,8-10,31,35,40-41,45-47,49-56
+page-portrait.php
+  s_f5ce9f8683adb0::t_0db3a7b653a77b 1-47
+assets/css/fonts.css
+  s_f5ce9f8683adb0::t_6006ce2f9b8334 1-254
+page-manifeste.php
+  s_f5ce9f8683adb0::t_270f33ef0ba351 1-42
+comments.php
+  s_f5ce9f8683adb0::t_4e79e40b9d1bd7 1-55
+docs/plans/2026-08-28-brevo-newsletter-embed.md
+  s_8d2e4b126fcfc1::t_5926e4bb6c6097 1-61
+functions.php
+  s_f5ce9f8683adb0::t_b2e6091d9989a8 1-21
+inc/queries.php
+  s_f5ce9f8683adb0::t_7be62ccd929486 1-47
+404.php
+  s_f5ce9f8683adb0::t_d930ce5f90dda3 1-23
+assets/css/editor.css
+  s_f5ce9f8683adb0::t_3dafcd09495a92 1-101
+template-parts/aucune-piece.php
+  s_f5ce9f8683adb0::t_b21dbc90bb8304 1-21
+template-parts/couverture.php
+  s_f5ce9f8683adb0::t_85bc04707e3c4e 15-33
+  s_f5ce9f8683adb0::t_36aef0a3d8d411 44-51,64
+  s_f5ce9f8683adb0::t_d1504053df2fe3 85,91
+  s_f5ce9f8683adb0::t_966a1ed053e415 1-14,34-43,52-63,65-79,82-84,86-90,92-118
+  s_f5ce9f8683adb0::t_5651baf3179506 80-81
+archive-entretien.php
+  s_f5ce9f8683adb0::t_c22bd043270c12 1-59
+front-page.php
+  s_f5ce9f8683adb0::t_900762ef52e6c5 1-16,18-62
+  s_f5ce9f8683adb0::t_4c38c62b4a1ce3 17
+inc/meta.php
+  s_f5ce9f8683adb0::t_420005b3e4662d 1-196
+header.php
+  s_f5ce9f8683adb0::t_ffadf1061016a7 1-26
+single.php
+  s_f5ce9f8683adb0::t_2090d7848a9578 50,52,60-62
+  s_f5ce9f8683adb0::t_66b22daa942392 1-49,51,53-59,63-88
+searchform.php
+  s_f5ce9f8683adb0::t_8d531262ef2393 1-25
+assets/css/theme.css
+  s_f5ce9f8683adb0::t_723cc29b09f82d 479
+  s_f5ce9f8683adb0::t_90a1b3e9abaf8d 714-718
+  s_f5ce9f8683adb0::t_a9f66bb26e2cb8 1-375,381-382,384-386,388,391-393,395-424,427-478,480-713,719-970,976-1009,1019-1266,1268,1270-1273,1275-1276,1278-1279,1285-1408
+  s_8d2e4b126fcfc1::t_1bc11f4e51a0d8 971-975,1010-1018
+  s_f5ce9f8683adb0::t_fd3bf44f4e0d2e 425-426
+  s_f5ce9f8683adb0::t_b42d73673eae19 376-380,383
+  s_f5ce9f8683adb0::t_71ee523ea85e1c 387,389-390,394
+  s_f5ce9f8683adb0::t_6d70d231f9f0ce 1267,1269,1274,1277
+  s_f5ce9f8683adb0::t_76180b6a331cae 1280-1284
+assets/js/theme.js
+  s_f5ce9f8683adb0::t_efb0f2f52cd296 1-49
+.gitignore
+  s_f5ce9f8683adb0::t_5b0cdf1b63f76f 5
+  s_cc15eb35c6dcbc::t_6491068d0b49c4 6-9
+  s_f5ce9f8683adb0::t_2c96b9292927b1 1-4
+inc/customizer.php
+  s_f5ce9f8683adb0::t_ff3f657ae69362 1-10,38-133,141-213,217-247,249-279
+  s_8d2e4b126fcfc1::t_1bc11f4e51a0d8 11-37,134-140,214-216,248
+bin/build-package.sh
+  s_8d2e4b126fcfc1::t_bd2df2735de1f4 45-46
+  s_f5ce9f8683adb0::t_20f3bddbe82680 1-40,43,47-83
+  s_f5ce9f8683adb0::t_507df0cc608201 44
+  s_8d2e4b126fcfc1::t_a20db45e07bfd8 41-42
+search.php
+  s_f5ce9f8683adb0::t_5101c074979218 1-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "112c7271ce018a84e7fc3e8ee9d79513cb897228",
+  "prompts": {},
+  "sessions": {
+    "s_8d2e4b126fcfc1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a04569-97d8-7051-9063-dcfab8ff43bc",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    },
+    "s_cc15eb35c6dcbc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41e8f289-df9b-4437-9551-9c099072505b",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    },
+    "s_f5ce9f8683adb0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ff1e9386-d051-4387-b704-cf5ffc904953",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
