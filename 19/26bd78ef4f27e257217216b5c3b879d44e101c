@@ -1,0 +1,22 @@
+tests/test-newsletter-embed.php
+  s_71ce33e93fce36::t_511f778240350a 181-193
+inc/newsletter.php
+  s_71ce33e93fce36::t_c3c2e97d4861ab 92-117,144,149-154,160,168,180,203-206
+  s_71ce33e93fce36::t_827d1a0d2b5f70 207
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "1926bd78ef4f27e257217216b5c3b879d44e101c",
+  "prompts": {},
+  "sessions": {
+    "s_71ce33e93fce36": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a04986-1eb5-7fd3-bbd7-a64d03b911bc",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
