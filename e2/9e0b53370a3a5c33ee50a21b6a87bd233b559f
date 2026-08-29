@@ -1,0 +1,19 @@
+README.md
+  s_2ca2926072d4fb::t_39412053029aba 142-144
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "e29e0b53370a3a5c33ee50a21b6a87bd233b559f",
+  "prompts": {},
+  "sessions": {
+    "s_2ca2926072d4fb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfe6f1db-505b-4dfc-a757-59cc6510d40c",
+        "model": "unknown"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
