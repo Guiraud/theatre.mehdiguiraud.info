@@ -139,7 +139,9 @@ et appel à s'inscrire à la newsletter.
 - Le lien **Confidentialité** est résolu automatiquement depuis la page définie
   dans Réglages → Confidentialité de WordPress. Aucun réglage de thème à tenir à
   jour : il suffit que la page soit publiée et désignée.
-- Le lien **Mentions légales** vient du réglage du thème décrit ci-dessus.
+- Le lien **Mentions légales** vient du réglage du thème décrit ci-dessus. En
+  production, ce réglage a été posé par le script de déploiement du 29 août 2026 et
+  vaut la page 56 ; sur une installation neuve, il reste à choisir à la main.
 - La navigation légale n'est rendue que si au moins un des deux liens existe, pour
   ne jamais annoncer une navigation vide aux lecteurs d'écran.
 - L'appel newsletter pointe vers l'ancre `#recevoir-les-pieces`, portée par le
