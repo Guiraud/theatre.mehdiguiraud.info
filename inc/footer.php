@@ -34,6 +34,33 @@ function refoulement_pages_legales() {
 }
 
 /**
+ * Adresse de la page d'inscription à la newsletter.
+ *
+ * Trois destinations, par ordre de préférence : une page du site dédiée à la
+ * lettre, la page hébergée par Brevo, puis l'ancre du bandeau de l'accueil.
+ *
+ * @param int $page_lettre Identifiant d'une page dédiée déjà vérifiée, ou 0.
+ * @return string Adresse absolue.
+ */
+function refoulement_adresse_lettre( $page_lettre = 0 ) {
+	if ( $page_lettre ) {
+		$adresse = get_permalink( $page_lettre );
+
+		if ( is_string( $adresse ) && '' !== $adresse ) {
+			return $adresse;
+		}
+	}
+
+	$brevo = refoulement_sanitize_brevo_embed_url( (string) refoulement_reglage( 'refoulement_lettre_brevo_url' ) );
+
+	if ( '' !== $brevo ) {
+		return $brevo;
+	}
+
+	return home_url( '/#recevoir-les-pieces' );
+}
+
+/**
  * Résout les liens légaux et l'ancre de la newsletter.
  *
  * Seules les pages réellement publiées produisent un lien : une page en
@@ -66,10 +93,16 @@ function refoulement_liens_pied() {
 		);
 	}
 
-	$liens['newsletter'] = array(
-		'label' => __( 'Recevoir les pièces', 'refoulement' ),
-		'url'   => home_url( '/#recevoir-les-pieces' ),
-	);
+	$page_lettre = absint( refoulement_reglage( 'refoulement_lettre_page_id' ) );
+	$page_lettre = ( $page_lettre && 'publish' === get_post_status( $page_lettre ) ) ? $page_lettre : 0;
+
+	// Sur la page dédiée elle-même, l'appel n'aurait nulle part où mener.
+	if ( ! $page_lettre || ! is_page( $page_lettre ) ) {
+		$liens['newsletter'] = array(
+			'label' => __( 'Recevoir les pièces', 'refoulement' ),
+			'url'   => refoulement_adresse_lettre( $page_lettre ),
+		);
+	}
 
 	return $liens;
 }

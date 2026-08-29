@@ -146,9 +146,15 @@ et appel à s'inscrire à la newsletter.
   vaut la page 56 ; sur une installation neuve, il reste à choisir à la main.
 - La navigation légale n'est rendue que si au moins un des deux liens existe, pour
   ne jamais annoncer une navigation vide aux lecteurs d'écran.
-- L'appel newsletter pointe vers l'ancre `#recevoir-les-pieces`, portée par le
-  bandeau d'inscription de l'accueil. Il fonctionne donc depuis n'importe quelle
-  page du site.
+- L'appel **S'inscrire à la newsletter** mène à une vraie page, dans cet ordre :
+  la page désignée par le réglage *Page dédiée à la newsletter* si elle est
+  publiée ; sinon le formulaire hébergé par Brevo (`sibforms.com`) ; sinon, en
+  dernier repli, l'ancre `#recevoir-les-pieces` du bandeau de l'accueil. Sur la
+  page dédiée elle-même, l'appel disparaît du pied : il n'aurait nulle part où
+  mener.
+- Le gabarit de page **Recevoir les pièces** (`page-lettre.php`) affiche le titre,
+  le contenu facultatif de la page, puis le bandeau d'inscription complet. C'est
+  lui qu'il faut appliquer à la page dédiée.
 
 Les textes légaux ne sont pas embarqués dans le thème : ce sont des pages
 WordPress. Leurs sources de déploiement, vérifiées le 28 août 2026, sont conservées

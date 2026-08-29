@@ -74,6 +74,12 @@ function get_option( $cle, $defaut = false ) {
 	return $defaut;
 }
 
+function is_page( $page = 0 ) {
+	$courante = $GLOBALS['refoulement_page_courante'] ?? 0;
+
+	return $courante && (int) $page === (int) $courante;
+}
+
 function get_privacy_policy_url() {
 	$id = $GLOBALS['refoulement_privacy_page'] ?? 0;
 
@@ -239,6 +245,14 @@ $GLOBALS['refoulement_pages'] = array(
 		'statut' => 'publish',
 		'slug'   => 'a-propos',
 	),
+	60 => array(
+		'statut' => 'publish',
+		'slug'   => 'recevoir-les-pieces',
+	),
+	61 => array(
+		'statut' => 'draft',
+		'slug'   => 'newsletter-brouillon',
+	),
 );
 
 $GLOBALS['refoulement_privacy_page'] = 3;
@@ -277,6 +291,47 @@ $GLOBALS['refoulement_privacy_page'] = 43;
 $liens = refoulement_liens_pied();
 
 expect_same( false, isset( $liens['confidentialite'] ), 'Une politique de confidentialité non publiée ne doit pas être liée.' );
+
+// --- Destination du lien newsletter ---------------------------------------
+
+$GLOBALS['refoulement_theme_mods']['refoulement_mentions_legales_page_id'] = 42;
+$GLOBALS['refoulement_privacy_page'] = 3;
+
+// 1. Une page dédiée publiée l'emporte sur tout le reste.
+$GLOBALS['refoulement_theme_mods']['refoulement_lettre_page_id']    = 60;
+$GLOBALS['refoulement_theme_mods']['refoulement_lettre_brevo_url']  = 'https://bd1602f2.sibforms.com/v2/serve/jeton==';
+$liens = refoulement_liens_pied();
+
+expect_same( 'https://example.test/recevoir-les-pieces/', $liens['newsletter']['url'] ?? null, 'Une page dédiée publiée doit devenir la destination du lien newsletter.' );
+
+// 2. Sans page dédiée, la page hébergée par Brevo prend le relais.
+$GLOBALS['refoulement_theme_mods']['refoulement_lettre_page_id'] = 0;
+$liens = refoulement_liens_pied();
+
+expect_same( 'https://bd1602f2.sibforms.com/v2/serve/jeton==', $liens['newsletter']['url'] ?? null, 'Sans page dédiée, le formulaire hébergé par Brevo doit servir de destination.' );
+
+// 3. Une page dédiée en brouillon ne doit pas produire de lien mort.
+$GLOBALS['refoulement_theme_mods']['refoulement_lettre_page_id'] = 61;
+$liens = refoulement_liens_pied();
+
+expect_same( 'https://bd1602f2.sibforms.com/v2/serve/jeton==', $liens['newsletter']['url'] ?? null, 'Une page dédiée en brouillon doit être ignorée au profit du repli.' );
+
+// 4. Sans page ni adresse Brevo, l'ancre de l'accueil reste le dernier repli.
+$GLOBALS['refoulement_theme_mods']['refoulement_lettre_page_id']   = 0;
+$GLOBALS['refoulement_theme_mods']['refoulement_lettre_brevo_url'] = '';
+$liens = refoulement_liens_pied();
+
+expect_same( 'https://example.test/#recevoir-les-pieces', $liens['newsletter']['url'] ?? null, 'Sans page ni formulaire hébergé, l’ancre de l’accueil reste le repli.' );
+
+// 5. Sur la page dédiée elle-même, l'appel ne doit pas pointer vers la page courante.
+$GLOBALS['refoulement_theme_mods']['refoulement_lettre_page_id'] = 60;
+$GLOBALS['refoulement_page_courante'] = 60;
+$liens = refoulement_liens_pied();
+
+expect_same( false, isset( $liens['newsletter'] ), 'Sur la page dédiée, l’appel du pied ne doit pas renvoyer à elle-même.' );
+
+$GLOBALS['refoulement_page_courante'] = 0;
+$GLOBALS['refoulement_theme_mods']['refoulement_lettre_page_id'] = 0;
 
 // --- Balisage du pied de page --------------------------------------------
 

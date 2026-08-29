@@ -179,6 +179,13 @@ function refoulement_reglages() {
 			'type'    => 'text',
 			'section' => 'refoulement_lettre',
 		),
+		'refoulement_lettre_page_id'   => array(
+			'defaut'      => 0,
+			'label'       => __( 'Page dédiée à la newsletter', 'refoulement' ),
+			'type'        => 'page',
+			'section'     => 'refoulement_lettre',
+			'description' => __( 'Destination du lien « S’inscrire à la newsletter » du pied de page. Seule une page publiée est utilisée ; sans page désignée, le lien mène au formulaire hébergé par Brevo, puis à défaut au bandeau de l’accueil.', 'refoulement' ),
+		),
 		'refoulement_lettre_contact'   => array(
 			'defaut'  => '',
 			'label'   => __( 'Adresse de contact (repli)', 'refoulement' ),
