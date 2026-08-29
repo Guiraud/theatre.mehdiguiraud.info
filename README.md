@@ -129,9 +129,15 @@ Apparence → Personnaliser → **Le Refoulement de Freud** :
   Seule une page publiée produit un lien ; une page en brouillon, supprimée ou non
   désignée est simplement omise du pied plutôt que rendue en lien mort.
 
-Menus : *principal* (bandeau noir) et *pied*. Sans menu *principal* assigné, le
-bandeau retombe sur la liste des pages publiées — les deux pages légales en sont
-écartées, elles appartiennent au pied de page.
+Menus : *principal* (bandeau noir) et *pied*.
+
+En production, un menu « Navigation principale » est assigné à l'emplacement
+*principal* et contient trois entrées éditoriales : À propos, Le Podcast et
+l'archive Entretiens. Ni les pages légales ni la page d'inscription n'y figurent :
+le pied de page les porte, et le lien vers le formulaire ne doit apparaître que là.
+
+Sans menu assigné, le bandeau retombe sur la liste des pages publiées ; ce repli
+écarte les pages légales, mais pas la page d'inscription — d'où le menu explicite.
 
 ## Pied de page et contenus légaux
 
