@@ -1,0 +1,19 @@
+README.md
+  s_2ca2926072d4fb::t_e242cec4dbf234 164-179
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "6a40cf9115b30bf46f3fdd72e30c158915a00976",
+  "prompts": {},
+  "sessions": {
+    "s_2ca2926072d4fb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfe6f1db-505b-4dfc-a757-59cc6510d40c",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
