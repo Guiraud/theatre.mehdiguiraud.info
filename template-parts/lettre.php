@@ -49,7 +49,7 @@ if ( '' === $refoulement_formulaire && '' === $refoulement_natif && '' === $refo
 	return;
 }
 ?>
-<aside class="lettre" aria-labelledby="lettre-titre">
+<aside id="recevoir-les-pieces" class="lettre" aria-labelledby="lettre-titre">
 	<?php
 	$refoulement_iframe_seule = '' === $refoulement_formulaire && '' === $refoulement_natif && '' !== $refoulement_brevo;
 	$refoulement_natif_seul   = '' === $refoulement_formulaire && '' !== $refoulement_natif;

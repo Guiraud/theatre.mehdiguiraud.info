@@ -957,6 +957,7 @@ p {
 .lettre {
 	background: var(--noir);
 	color: var(--tirage);
+	scroll-margin-top: 24px;
 }
 
 .lettre__interieur {
@@ -1223,16 +1224,62 @@ p {
 }
 
 .pied__interieur {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: minmax(0, 1.35fr) repeat(2, minmax(190px, 1fr));
 	gap: 32px;
 	padding-bottom: 24px;
 	border-bottom: 1px solid var(--filet-nuit);
 }
 
 .pied__colonne {
+	min-width: 0;
+}
+
+.pied__colonne--identite {
 	max-width: 420px;
+}
+
+.pied__titre {
+	margin: 0 0 12px;
+	font: 500 12px/1 var(--f-etiquette);
+	letter-spacing: .2em;
+	text-transform: uppercase;
+	color: var(--tirage);
+}
+
+.pied__colonne--informations nav + .menu-pied,
+.pied__colonne--informations nav + div {
+	margin-top: 14px;
+}
+
+.menu-pied--legal {
+	flex-direction: column;
+	gap: 10px;
+}
+
+.pied__appel {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 10px 18px;
+	border: 1px solid var(--rouge-nuit);
+	color: var(--tirage);
+	font: 400 14px/1.2 var(--f-etiquette);
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.pied__appel:hover,
+.pied__appel:focus {
+	background: var(--rouge-nuit);
+	color: var(--tirage);
+	text-decoration: none;
+}
+
+.pied a:focus-visible {
+	outline: 2px solid var(--tirage);
+	outline-offset: 3px;
 }
 
 .pied__manchette {
@@ -1273,6 +1320,9 @@ p {
 
 .menu-pied a,
 .pied a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
 	color: var(--rouge-nuit);
 	font: 400 14px/1.6 var(--f-etiquette);
 	letter-spacing: .1em;
@@ -1444,6 +1494,10 @@ p {
 
 	.decoupes__piece--2 {
 		left: 130px;
+	}
+
+	.pied__interieur {
+		grid-template-columns: 1fr;
 	}
 
 	.lettre__formulaire {

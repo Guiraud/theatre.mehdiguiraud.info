@@ -213,6 +213,7 @@ $markup_shortcode = render_newsletter(
 
 expect_contains( 'lettre__formulaire--brevo', $markup_shortcode, 'Le formulaire natif doit porter sa classe de mise en page.' );
 expect_contains( 'lettre__interieur lettre__interieur--natif', $markup_shortcode, 'Le conteneur doit passer en colonne : le formulaire natif est un bloc vertical, pas la paire champ + bouton en ligne.' );
+expect_contains( 'id="recevoir-les-pieces"', $markup_shortcode, 'Le bandeau doit exposer une ancre stable.' );
 expect_contains( 'sib_signup_form', $markup_shortcode, 'Le balisage du plugin Brevo doit être rendu tel quel.' );
 expect_contains( '<label for="refoulement-brevo-1-email">Email Address*</label>', $markup_shortcode, 'Le formulaire Brevo rendu par le thème doit retrouver ses étiquettes accessibles.' );
 expect_contains( '<h2 id="lettre-titre" class="lettre__titre"', $markup_shortcode, 'Le titre reste visible : le formulaire natif ne porte pas le sien.' );
