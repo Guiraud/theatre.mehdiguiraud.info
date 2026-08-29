@@ -1,0 +1,19 @@
+bin/build-package.sh
+  s_2ca2926072d4fb::t_e92bf946887557 44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "02345eca4b5179db657b868601a4c30ddd5c0336",
+  "prompts": {},
+  "sessions": {
+    "s_2ca2926072d4fb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfe6f1db-505b-4dfc-a757-59cc6510d40c",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
