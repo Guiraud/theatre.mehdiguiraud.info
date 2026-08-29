@@ -35,11 +35,13 @@ defined( 'ABSPATH' ) || exit;
 			} else {
 				echo '<ul class="menu-principal">';
 
+				// Les pages légales vivent dans le pied, pas dans le fil éditorial.
 				$pages = wp_list_pages( array(
 					'title_li' => '',
 					'depth'    => 1,
 					'echo'     => false,
 					'number'   => 4,
+					'exclude'  => implode( ',', refoulement_pages_legales() ),
 				) );
 
 				echo wp_kses_post( (string) $pages );

@@ -66,6 +66,14 @@ function get_permalink( $id ) {
 		: false;
 }
 
+function get_option( $cle, $defaut = false ) {
+	if ( 'wp_page_for_privacy_policy' === $cle ) {
+		return $GLOBALS['refoulement_privacy_page'] ?? 0;
+	}
+
+	return $defaut;
+}
+
 function get_privacy_policy_url() {
 	$id = $GLOBALS['refoulement_privacy_page'] ?? 0;
 
@@ -133,6 +141,36 @@ function dynamic_sidebar() {
 function wp_footer() {
 }
 
+function refoulement_manchette() {
+	echo '<p class="bandeau__manchette">Le Refoulement</p>';
+}
+
+function get_post_type_archive_link( $type ) {
+	return 'https://example.test/' . $type . 's/';
+}
+
+function wp_kses_post( $valeur ) {
+	return $valeur;
+}
+
+$GLOBALS['refoulement_pages_listees'] = array();
+
+function wp_list_pages( $arguments = array() ) {
+	$GLOBALS['refoulement_pages_listees'] = $arguments;
+	$exclues = array_filter( array_map( 'intval', explode( ',', (string) ( $arguments['exclude'] ?? '' ) ) ) );
+	$sortie  = '';
+
+	foreach ( $GLOBALS['refoulement_pages'] as $id => $page ) {
+		if ( 'publish' !== $page['statut'] || in_array( (int) $id, $exclues, true ) ) {
+			continue;
+		}
+
+		$sortie .= '<li class="page_item page-item-' . $id . '"><a href="' . get_permalink( $id ) . '">' . $page['slug'] . '</a></li>';
+	}
+
+	return $sortie;
+}
+
 require_once __DIR__ . '/../inc/customizer.php';
 require_once __DIR__ . '/../inc/footer.php';
 
@@ -144,6 +182,17 @@ require_once __DIR__ . '/../inc/footer.php';
 function render_footer() {
 	ob_start();
 	include __DIR__ . '/../footer.php';
+	return (string) ob_get_clean();
+}
+
+/**
+ * Rend le bandeau de navigation et retourne son balisage.
+ *
+ * @return string
+ */
+function render_bandeau() {
+	ob_start();
+	include __DIR__ . '/../template-parts/bandeau-nav.php';
 	return (string) ob_get_clean();
 }
 
@@ -185,6 +234,10 @@ $GLOBALS['refoulement_pages'] = array(
 	43 => array(
 		'statut' => 'draft',
 		'slug'   => 'mentions-legales-brouillon',
+	),
+	17 => array(
+		'statut' => 'publish',
+		'slug'   => 'a-propos',
 	),
 );
 
@@ -256,6 +309,24 @@ expect_not_contains( 'aria-label="Informations légales"', $pied_sans_pages, 'Un
 expect_contains( 'class="pied__appel"', $pied_sans_pages, 'L’appel newsletter reste rendu sans pages légales.' );
 expect_not_contains( 'pied__colonne--informations', $pied_sans_pages, 'Sans lien légal, sans menu et sans widget, la colonne « Informations » ne doit pas laisser un titre seul.' );
 expect_not_contains( '>Informations<', $pied_sans_pages, 'Le titre « Informations » ne doit pas être rendu au-dessus du vide.' );
+
+// --- Navigation du haut : les pages légales restent au pied ----------------
+
+$GLOBALS['refoulement_privacy_page'] = 3;
+$GLOBALS['refoulement_theme_mods']['refoulement_mentions_legales_page_id'] = 42;
+
+expect_same( array( 42, 3 ), refoulement_pages_legales(), 'Les deux pages légales publiées doivent être identifiées.' );
+
+$bandeau = render_bandeau();
+
+expect_not_contains( 'page-item-42', $bandeau, 'Les mentions légales ne doivent pas apparaître dans la navigation du haut.' );
+expect_not_contains( 'page-item-3', $bandeau, 'La confidentialité ne doit pas apparaître dans la navigation du haut.' );
+expect_contains( 'page-item-17', $bandeau, 'Les pages éditoriales doivent rester dans la navigation du haut.' );
+
+$GLOBALS['refoulement_theme_mods']['refoulement_mentions_legales_page_id'] = 43;
+$GLOBALS['refoulement_privacy_page'] = 0;
+
+expect_same( array(), refoulement_pages_legales(), 'Sans page légale publiée, rien n’est exclu de la navigation.' );
 
 if ( $failures ) {
 	fwrite( STDERR, "ÉCHEC\n- " . implode( "\n- ", $failures ) . "\n" );
