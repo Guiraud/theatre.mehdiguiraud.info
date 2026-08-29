@@ -161,6 +161,22 @@ uniquement à créer ou mettre à jour les deux pages dans WordPress, puis à d�
 la page de confidentialité dans Réglages → Confidentialité et la page des mentions
 légales dans l'outil de personnalisation.
 
+### Redirection de l'ancienne adresse
+
+La page de confidentialité s'appelait `confidentialite-newsletter`. Le passage au
+slug `confidentialite` a été fait le 29 août 2026 ; WordPress n'a pas enregistré de
+redirection d'ancien slug pour cette page hiérarchique, et l'ancienne adresse
+renvoyait un 404. Une redirection permanente a donc été ajoutée à la fin du
+`.htaccess` de production :
+
+```apache
+Redirect 301 /index.php/confidentialite-newsletter/ /index.php/confidentialite/
+```
+
+Le site n'utilise pas de bloc de réécriture WordPress dans `.htaccess` — les
+permaliens passent par `/index.php/` — donc cette directive n'entre en conflit avec
+rien. Elle reste nécessaire tant que des liens entrants visent l'ancienne adresse.
+
 **À revoir dès qu'un traitement change** : ajout ou retrait d'une extension qui
 collecte des données, changement de prestataire d'envoi, activation d'un outil de
 mesure d'audience, ouverture d'un formulaire de contact, ou modification des
