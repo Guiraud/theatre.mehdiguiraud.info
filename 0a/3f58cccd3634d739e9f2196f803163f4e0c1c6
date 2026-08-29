@@ -1,0 +1,23 @@
+tests/test-footer.php
+  s_2ca2926072d4fb::t_dc3e2fb42c4b19 257-258
+assets/css/theme.css
+  s_2ca2926072d4fb::t_64283bada78182 1228,1321,1325-1328
+footer.php
+  s_2ca2926072d4fb::t_dd282a76b90ce7 12-14,28,60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "0a3f58cccd3634d739e9f2196f803163f4e0c1c6",
+  "prompts": {},
+  "sessions": {
+    "s_2ca2926072d4fb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfe6f1db-505b-4dfc-a757-59cc6510d40c",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
