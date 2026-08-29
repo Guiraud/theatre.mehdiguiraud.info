@@ -1,0 +1,24 @@
+docs/content/mentions-legales.html
+  s_2ca2926072d4fb::t_f09da03478ca39 1-18
+README.md
+  s_2ca2926072d4fb::t_b5c4aa4607b8cf 128-131,134-168
+  s_2ca2926072d4fb::t_8ab1bb24ad870f 169
+docs/content/confidentialite.html
+  s_2ca2926072d4fb::t_f09da03478ca39 1-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "36213ad0054e4ac662b4866697a4adf72659aa8f",
+  "prompts": {},
+  "sessions": {
+    "s_2ca2926072d4fb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfe6f1db-505b-4dfc-a757-59cc6510d40c",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
