@@ -1,0 +1,29 @@
+tests/test-footer.php
+  s_2ca2926072d4fb::t_9c155c308a7a28 77-82,248-255,295-334
+  s_2ca2926072d4fb::t_894774c39a437e 335
+README.md
+  s_2ca2926072d4fb::t_96fbd03a922508 149-157
+inc/footer.php
+  s_2ca2926072d4fb::t_a3257020e89dcd 37-62,96-105
+  s_2ca2926072d4fb::t_a1db8efcad7a27 36
+inc/customizer.php
+  s_2ca2926072d4fb::t_a3257020e89dcd 182-188
+page-lettre.php
+  s_2ca2926072d4fb::t_4059b4d9d2293c 1-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "10f25cad016707b6a08eee5ad01d130e36c3c30a",
+  "prompts": {},
+  "sessions": {
+    "s_2ca2926072d4fb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfe6f1db-505b-4dfc-a757-59cc6510d40c",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
