@@ -125,7 +125,47 @@ Apparence → Personnaliser → **Le Refoulement de Freud** :
   l'éditeur de formulaire de Brevo ; le thème ne cadre que le bloc, les champs et le
   bouton pour les accorder au bandeau noir.
 
+- *Pied de page* : **page des mentions légales**, choisie parmi les pages du site.
+  Seule une page publiée produit un lien ; une page en brouillon, supprimée ou non
+  désignée est simplement omise du pied plutôt que rendue en lien mort.
+
 Menus : *principal* (bandeau noir) et *pied*.
+
+## Pied de page et contenus légaux
+
+Le pied de page est une grille de trois colonnes : identité du site, informations,
+et appel à s'inscrire à la newsletter.
+
+- Le lien **Confidentialité** est résolu automatiquement depuis la page définie
+  dans Réglages → Confidentialité de WordPress. Aucun réglage de thème à tenir à
+  jour : il suffit que la page soit publiée et désignée.
+- Le lien **Mentions légales** vient du réglage du thème décrit ci-dessus.
+- La navigation légale n'est rendue que si au moins un des deux liens existe, pour
+  ne jamais annoncer une navigation vide aux lecteurs d'écran.
+- L'appel newsletter pointe vers l'ancre `#recevoir-les-pieces`, portée par le
+  bandeau d'inscription de l'accueil. Il fonctionne donc depuis n'importe quelle
+  page du site.
+
+Les textes légaux ne sont pas embarqués dans le thème : ce sont des pages
+WordPress. Leurs sources de déploiement, vérifiées le 28 août 2026, sont conservées
+dans `docs/content/` :
+
+- `docs/content/mentions-legales.html` — édition, hébergement OVH, propriété
+  intellectuelle, correction et signalement, responsabilité ;
+- `docs/content/confidentialite.html` — responsable du traitement, newsletter
+  Brevo, commentaires, sécurité et journaux (OVH, Wordfence), cookies,
+  destinataires et transferts, droits et réclamation CNIL.
+
+Ces fichiers sont exclus du paquet du thème (`bin/build-package.sh`) : ils servent
+uniquement à créer ou mettre à jour les deux pages dans WordPress, puis à désigner
+la page de confidentialité dans Réglages → Confidentialité et la page des mentions
+légales dans l'outil de personnalisation.
+
+**À revoir dès qu'un traitement change** : ajout ou retrait d'une extension qui
+collecte des données, changement de prestataire d'envoi, activation d'un outil de
+mesure d'audience, ouverture d'un formulaire de contact, ou modification des
+réglages de commentaires. Le contenu décrit des traitements réellement observés :
+il perd sa valeur dès qu'il cesse de correspondre au site.
 
 ## Polices
 
