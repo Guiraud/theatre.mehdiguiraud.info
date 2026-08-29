@@ -37,6 +37,4 @@ while ( have_posts() ) :
 	<?php
 endwhile;
 
-get_template_part( 'template-parts/lettre' );
-
 get_footer();

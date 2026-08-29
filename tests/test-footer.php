@@ -258,13 +258,14 @@ $GLOBALS['refoulement_pages'] = array(
 $GLOBALS['refoulement_privacy_page'] = 3;
 
 $GLOBALS['refoulement_theme_mods']['refoulement_mentions_legales_page_id'] = 42;
+$GLOBALS['refoulement_theme_mods']['refoulement_lettre_page_id']          = 60;
 
 $liens = refoulement_liens_pied();
 
 expect_same( 'https://example.test/mentions-legales/', $liens['mentions']['url'] ?? null, 'La page publiée doit être liée.' );
 expect_same( 'Mentions légales', $liens['mentions']['label'] ?? null, 'Le lien légal doit porter son libellé traduit.' );
 expect_same( 'https://example.test/confidentialite/', $liens['confidentialite']['url'] ?? null, 'La politique WordPress doit être liée.' );
-expect_same( 'https://example.test/#recevoir-les-pieces', $liens['newsletter']['url'] ?? null, 'La newsletter doit viser l’ancre de l’accueil.' );
+expect_same( 'https://example.test/recevoir-les-pieces/', $liens['newsletter']['url'] ?? null, 'La newsletter doit viser sa page dédiée.' );
 
 $GLOBALS['refoulement_theme_mods']['refoulement_mentions_legales_page_id'] = 43;
 $liens = refoulement_liens_pied();
@@ -316,12 +317,17 @@ $liens = refoulement_liens_pied();
 
 expect_same( 'https://bd1602f2.sibforms.com/v2/serve/jeton==', $liens['newsletter']['url'] ?? null, 'Une page dédiée en brouillon doit être ignorée au profit du repli.' );
 
-// 4. Sans page ni adresse Brevo, l'ancre de l'accueil reste le dernier repli.
+// 4. Sans page ni adresse Brevo, il n'existe aucune destination : pas de lien.
 $GLOBALS['refoulement_theme_mods']['refoulement_lettre_page_id']   = 0;
 $GLOBALS['refoulement_theme_mods']['refoulement_lettre_brevo_url'] = '';
 $liens = refoulement_liens_pied();
 
-expect_same( 'https://example.test/#recevoir-les-pieces', $liens['newsletter']['url'] ?? null, 'Sans page ni formulaire hébergé, l’ancre de l’accueil reste le repli.' );
+expect_same( false, isset( $liens['newsletter'] ), 'Sans page ni formulaire hébergé, aucun appel ne doit être rendu.' );
+
+$pied_sans_destination = render_footer();
+
+expect_not_contains( 'pied__colonne--lettre', $pied_sans_destination, 'Sans destination, la colonne newsletter ne doit pas être rendue.' );
+expect_not_contains( 'href=""', $pied_sans_destination, 'Aucun lien vide ne doit subsister.' );
 
 // 5. Sur la page dédiée elle-même, l'appel ne doit pas pointer vers la page courante.
 $GLOBALS['refoulement_theme_mods']['refoulement_lettre_page_id'] = 60;
@@ -349,6 +355,7 @@ $GLOBALS['refoulement_bloginfo'] = array(
 
 $GLOBALS['refoulement_privacy_page'] = 3;
 $GLOBALS['refoulement_theme_mods']['refoulement_mentions_legales_page_id'] = 42;
+$GLOBALS['refoulement_theme_mods']['refoulement_lettre_page_id']          = 60;
 
 $pied = render_footer();
 
@@ -358,7 +365,7 @@ expect_contains( '>Mentions légales</a>', $pied, 'Le lien vers les mentions doi
 expect_contains( '>Confidentialité</a>', $pied, 'Le lien de confidentialité doit être rendu.' );
 expect_contains( 'href="https://example.test/mentions-legales/"', $pied, 'Le lien des mentions doit pointer vers la page publiée.' );
 expect_contains( 'class="pied__appel"', $pied, 'La newsletter doit être un appel à l’action distinct.' );
-expect_contains( 'href="https://example.test/#recevoir-les-pieces"', $pied, 'L’appel doit fonctionner hors de l’accueil.' );
+expect_contains( 'href="https://example.test/recevoir-les-pieces/"', $pied, 'L’appel doit mener à la page dédiée depuis n’importe quelle page.' );
 
 $GLOBALS['refoulement_theme_mods']['refoulement_mentions_legales_page_id'] = 43;
 $GLOBALS['refoulement_privacy_page'] = 0;

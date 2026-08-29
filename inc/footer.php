@@ -36,11 +36,13 @@ function refoulement_pages_legales() {
 /**
  * Adresse de la page d'inscription à la newsletter.
  *
- * Trois destinations, par ordre de préférence : une page du site dédiée à la
- * lettre, la page hébergée par Brevo, puis l'ancre du bandeau de l'accueil.
+ * Deux destinations, par ordre de préférence : une page du site dédiée à la
+ * lettre, puis la page hébergée par Brevo. Le formulaire n'étant plus ajouté au
+ * bas des autres gabarits, aucune ancre ne sert de repli : sans destination
+ * réelle, le pied n'affiche pas d'appel plutôt qu'un lien mort.
  *
  * @param int $page_lettre Identifiant d'une page dédiée déjà vérifiée, ou 0.
- * @return string Adresse absolue.
+ * @return string Adresse absolue, ou chaîne vide si aucune destination.
  */
 function refoulement_adresse_lettre( $page_lettre = 0 ) {
 	if ( $page_lettre ) {
@@ -51,13 +53,7 @@ function refoulement_adresse_lettre( $page_lettre = 0 ) {
 		}
 	}
 
-	$brevo = refoulement_sanitize_brevo_embed_url( (string) refoulement_reglage( 'refoulement_lettre_brevo_url' ) );
-
-	if ( '' !== $brevo ) {
-		return $brevo;
-	}
-
-	return home_url( '/#recevoir-les-pieces' );
+	return refoulement_sanitize_brevo_embed_url( (string) refoulement_reglage( 'refoulement_lettre_brevo_url' ) );
 }
 
 /**
@@ -96,11 +92,13 @@ function refoulement_liens_pied() {
 	$page_lettre = absint( refoulement_reglage( 'refoulement_lettre_page_id' ) );
 	$page_lettre = ( $page_lettre && 'publish' === get_post_status( $page_lettre ) ) ? $page_lettre : 0;
 
+	$adresse_lettre = refoulement_adresse_lettre( $page_lettre );
+
 	// Sur la page dédiée elle-même, l'appel n'aurait nulle part où mener.
-	if ( ! $page_lettre || ! is_page( $page_lettre ) ) {
+	if ( '' !== $adresse_lettre && ( ! $page_lettre || ! is_page( $page_lettre ) ) ) {
 		$liens['newsletter'] = array(
 			'label' => __( 'Recevoir les pièces', 'refoulement' ),
-			'url'   => refoulement_adresse_lettre( $page_lettre ),
+			'url'   => $adresse_lettre,
 		);
 	}
 
