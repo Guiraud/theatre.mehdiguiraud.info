@@ -254,6 +254,8 @@ expect_not_contains( '>Mentions légales</a>', $pied_sans_pages, 'Une page en br
 expect_not_contains( '>Confidentialité</a>', $pied_sans_pages, 'Sans politique publiée, aucun lien de confidentialité n’est rendu.' );
 expect_not_contains( 'aria-label="Informations légales"', $pied_sans_pages, 'Une navigation légale vide ne doit pas être rendue.' );
 expect_contains( 'class="pied__appel"', $pied_sans_pages, 'L’appel newsletter reste rendu sans pages légales.' );
+expect_not_contains( 'pied__colonne--informations', $pied_sans_pages, 'Sans lien légal, sans menu et sans widget, la colonne « Informations » ne doit pas laisser un titre seul.' );
+expect_not_contains( '>Informations<', $pied_sans_pages, 'Le titre « Informations » ne doit pas être rendu au-dessus du vide.' );
 
 if ( $failures ) {
 	fwrite( STDERR, "ÉCHEC\n- " . implode( "\n- ", $failures ) . "\n" );

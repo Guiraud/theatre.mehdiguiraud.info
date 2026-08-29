@@ -9,6 +9,9 @@ defined( 'ABSPATH' ) || exit;
 
 $refoulement_liens_pied = refoulement_liens_pied();
 $refoulement_liens_legaux = array_intersect_key( $refoulement_liens_pied, array_flip( array( 'mentions', 'confidentialite' ) ) );
+
+// Sans lien légal, sans menu et sans widget, la colonne resterait un titre seul.
+$refoulement_informations = $refoulement_liens_legaux || has_nav_menu( 'pied' ) || is_active_sidebar( 'pied' );
 ?>
 	</main><!-- .site__contenu -->
 
@@ -22,6 +25,7 @@ $refoulement_liens_legaux = array_intersect_key( $refoulement_liens_pied, array_
 				<p class="pied__cote"><?php echo esc_html( refoulement_numero_dossier() . ' · ' . refoulement_mention_edition() ); ?></p>
 			</div>
 
+			<?php if ( $refoulement_informations ) : ?>
 			<div class="pied__colonne pied__colonne--informations">
 				<p class="pied__titre"><?php esc_html_e( 'Informations', 'refoulement' ); ?></p>
 
@@ -53,6 +57,7 @@ $refoulement_liens_legaux = array_intersect_key( $refoulement_liens_pied, array_
 				}
 				?>
 			</div>
+			<?php endif; ?>
 
 			<div class="pied__colonne pied__colonne--lettre">
 				<p class="pied__titre"><?php esc_html_e( 'Recevoir les pièces', 'refoulement' ); ?></p>

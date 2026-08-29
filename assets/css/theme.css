@@ -1225,7 +1225,7 @@ p {
 
 .pied__interieur {
 	display: grid;
-	grid-template-columns: minmax(0, 1.35fr) repeat(2, minmax(190px, 1fr));
+	grid-template-columns: minmax(0, 1.35fr) repeat(auto-fit, minmax(190px, 1fr));
 	gap: 32px;
 	padding-bottom: 24px;
 	border-bottom: 1px solid var(--filet-nuit);
@@ -1318,11 +1318,14 @@ p {
 	list-style: none;
 }
 
-.menu-pied a,
-.pied a {
+.menu-pied a {
 	display: inline-flex;
 	align-items: center;
 	min-height: 44px;
+}
+
+.menu-pied a,
+.pied a {
 	color: var(--rouge-nuit);
 	font: 400 14px/1.6 var(--f-etiquette);
 	letter-spacing: .1em;
