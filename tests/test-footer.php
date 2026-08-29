@@ -330,6 +330,13 @@ $liens = refoulement_liens_pied();
 
 expect_same( false, isset( $liens['newsletter'] ), 'Sur la page dédiée, l’appel du pied ne doit pas renvoyer à elle-même.' );
 
+// 6. Le pied ne doit pas rendre de colonne ni de lien vide sur cette page.
+$pied_page_lettre = render_footer();
+
+expect_not_contains( 'pied__appel', $pied_page_lettre, 'Aucun appel ne doit être rendu sur la page dédiée.' );
+expect_not_contains( 'pied__colonne--lettre', $pied_page_lettre, 'La colonne newsletter ne doit pas rester vide sur la page dédiée.' );
+expect_not_contains( 'href=""', $pied_page_lettre, 'Le pied ne doit jamais rendre de lien vide.' );
+
 $GLOBALS['refoulement_page_courante'] = 0;
 $GLOBALS['refoulement_theme_mods']['refoulement_lettre_page_id'] = 0;
 

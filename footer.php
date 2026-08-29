@@ -59,11 +59,13 @@ $refoulement_informations = $refoulement_liens_legaux || has_nav_menu( 'pied' ) 
 			</div>
 			<?php endif; ?>
 
+			<?php if ( isset( $refoulement_liens_pied['newsletter'] ) ) : ?>
 			<div class="pied__colonne pied__colonne--lettre">
 				<p class="pied__titre"><?php esc_html_e( 'Recevoir les pièces', 'refoulement' ); ?></p>
 				<p class="pied__accroche"><?php esc_html_e( 'Suivre les nouvelles pièces versées au dossier.', 'refoulement' ); ?></p>
 				<a class="pied__appel" href="<?php echo esc_url( $refoulement_liens_pied['newsletter']['url'] ); ?>"><?php esc_html_e( 'S’inscrire à la newsletter', 'refoulement' ); ?></a>
 			</div>
+			<?php endif; ?>
 		</div>
 
 		<p class="pied__mention">
