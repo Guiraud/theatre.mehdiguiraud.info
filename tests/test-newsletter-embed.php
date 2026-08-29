@@ -178,6 +178,19 @@ if ( ! function_exists( 'refoulement_accessibiliser_formulaire_brevo' ) ) {
 	expect_contains( 'id="refoulement-brevo-7-contact-postal-code"', $forme_ids_uniques, 'Les caractères spéciaux du nom doivent produire un identifiant HTML stable.' );
 	expect_contains( 'id="refoulement-brevo-7-contact-postal-code-2"', $forme_ids_uniques, 'Deux champs de même nom doivent recevoir des identifiants distincts.' );
 	expect_not_contains( 'name="consent" id=', $forme_ids_uniques, 'Une case à cocher ne doit pas être transformée comme un champ de texte.' );
+
+	$forme_label_vide = '<form id="sib_signup_form_8"><p><label for="nom-vide"></label>Nom<input id="nom-vide" type="text" name="NAME"></p></form>';
+	$forme_label_reparee = refoulement_accessibiliser_formulaire_brevo( $forme_label_vide );
+	expect_contains( '<label for="refoulement-brevo-8-name">Nom</label>', $forme_label_reparee, 'Une étiquette explicite vide ne doit pas empêcher la restauration du nom accessible.' );
+	expect_same( $forme_label_reparee, refoulement_accessibiliser_formulaire_brevo( $forme_label_reparee ), 'La réparation d’une étiquette explicite vide doit être idempotente.' );
+
+	$forme_element_intermediaire = '<form id="sib_signup_form_9"><p>Nom<span></span><input type="text" name="LASTNAME"></p></form>';
+	$forme_texte_retrouve = refoulement_accessibiliser_formulaire_brevo( $forme_element_intermediaire );
+	expect_contains( '<label for="refoulement-brevo-9-lastname">Nom</label>', $forme_texte_retrouve, 'Le dernier texte direct visible doit être retrouvé au-delà d’un élément intermédiaire.' );
+	expect_same( $forme_texte_retrouve, refoulement_accessibiliser_formulaire_brevo( $forme_texte_retrouve ), 'La réparation avec un élément intermédiaire doit être idempotente.' );
+
+	$forme_aria_externe = '<form id="sib_signup_form_10"><p>Ville<input type="text" name="CITY" aria-labelledby="titre-ville-externe"></p></form>';
+	expect_same( $forme_aria_externe, refoulement_accessibiliser_formulaire_brevo( $forme_aria_externe ), 'Une référence ARIA absente du fragment peut viser la page complète et doit rester inchangée.' );
 }
 
 if ( ! function_exists( 'refoulement_sanitize_brevo_form_id' ) ) {

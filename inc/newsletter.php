@@ -89,6 +89,32 @@ function refoulement_accessibiliser_formulaire_brevo( $html ) {
 		}
 	}
 
+	$element_fournit_nom = static function ( $element ) use ( $dom ) {
+		if ( ! $element instanceof DOMElement ) {
+			return false;
+		}
+
+		if ( '' !== trim( $element->textContent ) || '' !== trim( $element->getAttribute( 'aria-label' ) ) || '' !== trim( $element->getAttribute( 'title' ) ) ) {
+			return true;
+		}
+
+		$references = preg_split( '/\s+/', trim( $element->getAttribute( 'aria-labelledby' ) ), -1, PREG_SPLIT_NO_EMPTY );
+
+		foreach ( $references as $reference ) {
+			$cible = $dom->getElementById( $reference );
+
+			if ( ! $cible instanceof DOMElement ) {
+				return true;
+			}
+
+			if ( '' !== trim( $cible->textContent ) || '' !== trim( $cible->getAttribute( 'aria-label' ) ) || '' !== trim( $cible->getAttribute( 'title' ) ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	};
+
 	$champs = array();
 
 	foreach ( array( 'input', 'select', 'textarea' ) as $balise ) {
@@ -115,17 +141,23 @@ function refoulement_accessibiliser_formulaire_brevo( $html ) {
 		$aria_attribut = trim( $champ->getAttribute( 'aria-labelledby' ) );
 		$aria_designe  = preg_split( '/\s+/', $aria_attribut, -1, PREG_SPLIT_NO_EMPTY );
 		$aria_valide   = false;
+		$aria_interne  = true;
 
 		foreach ( $aria_designe as $identifiant_aria ) {
 			$element_aria = $dom->getElementById( $identifiant_aria );
 
-			if ( $element_aria instanceof DOMElement && ( '' !== trim( $element_aria->textContent ) || '' !== trim( $element_aria->getAttribute( 'aria-label' ) ) ) ) {
+			if ( ! $element_aria instanceof DOMElement ) {
+				$aria_interne = false;
+				break;
+			}
+
+			if ( $element_fournit_nom( $element_aria ) ) {
 				$aria_valide = true;
 				break;
 			}
 		}
 
-		if ( $aria_valide ) {
+		if ( ! $aria_interne || $aria_valide ) {
 			continue;
 		}
 
@@ -133,7 +165,7 @@ function refoulement_accessibiliser_formulaire_brevo( $html ) {
 		$etiquete_existante = false;
 
 		while ( $ancetre instanceof DOMElement && $ancetre !== $wrapper ) {
-			if ( 'label' === strtolower( $ancetre->tagName ) ) {
+			if ( 'label' === strtolower( $ancetre->tagName ) && $element_fournit_nom( $ancetre ) ) {
 				$etiquete_existante = true;
 				break;
 			}
@@ -145,7 +177,7 @@ function refoulement_accessibiliser_formulaire_brevo( $html ) {
 
 		if ( ! $etiquete_existante && '' !== $ancien_id && 1 === ( $identifiants[ $ancien_id ] ?? 0 ) ) {
 			foreach ( $wrapper->getElementsByTagName( 'label' ) as $etiquette ) {
-				if ( $etiquette instanceof DOMElement && $ancien_id === $etiquette->getAttribute( 'for' ) ) {
+				if ( $etiquette instanceof DOMElement && $ancien_id === $etiquette->getAttribute( 'for' ) && $element_fournit_nom( $etiquette ) ) {
 					$etiquete_existante = true;
 					break;
 				}
@@ -168,7 +200,11 @@ function refoulement_accessibiliser_formulaire_brevo( $html ) {
 				continue;
 			}
 
-			if ( XML_ELEMENT_NODE === $noeud->nodeType && 'br' === strtolower( $noeud->nodeName ) ) {
+			if ( XML_ELEMENT_NODE === $noeud->nodeType ) {
+				if ( in_array( strtolower( $noeud->nodeName ), array( 'input', 'select', 'textarea' ), true ) ) {
+					break;
+				}
+
 				continue;
 			}
 
