@@ -200,7 +200,7 @@ function refoulement_reglages() {
 			'section' => 'refoulement_ecouter',
 		),
 		'refoulement_ecouter_spotify'  => array(
-			'defaut'      => '',
+			'defaut'      => 'https://open.spotify.com/show/7sKjKaoeWA5cSevsv90Moy',
 			'label'       => __( 'Spotify', 'refoulement' ),
 			'type'        => 'url',
 			'section'     => 'refoulement_ecouter',
