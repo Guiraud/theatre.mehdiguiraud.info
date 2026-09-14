@@ -1,0 +1,25 @@
+functions.php
+  s_00686901a23f3a::t_04fa2c87804dae 10
+template-parts/ecouter.php
+  s_00686901a23f3a::t_e08972db569e4f 59-62
+style.css
+  s_00686901a23f3a::t_93e1e605c952e5 7
+inc/customizer.php
+  s_00686901a23f3a::t_86a42c81f9dec4 210
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "125381f24a5f3cf52a4f573179577b72e30067ea",
+  "prompts": {},
+  "sessions": {
+    "s_00686901a23f3a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "eb6b9f0c-327e-4384-9388-d28c76c149ab",
+        "model": "default"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
