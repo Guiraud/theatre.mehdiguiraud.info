@@ -1,0 +1,39 @@
+footer.php
+  s_00686901a23f3a::t_9b256b69ffb3a5 12-13
+style.css
+  s_00686901a23f3a::t_b5e5c7bc337eda 7
+assets/css/theme.css
+  s_00686901a23f3a::t_2c89036b1454b1 1110,1112-1113
+  s_00686901a23f3a::t_0d0ebcd06ca0ae 16
+  s_00686901a23f3a::t_8e25d6a26a73e5 1547
+  s_00686901a23f3a::t_c2940f2f916bbb 1101-1109,1111,1114-1169
+  s_00686901a23f3a::t_9ad32d0d36e38d 1170
+functions.php
+  s_00686901a23f3a::t_d263fee83e8edd 10
+template-parts/ecouter.php
+  s_00686901a23f3a::t_f93ac5ca791440 54-58
+  s_00686901a23f3a::t_1b91911f2ef74d 1-16,21-22,27-28,33-34,39-40,45-46,51-52,60,66,71-77,79-96,98-103
+  s_00686901a23f3a::t_75c1205dd521c3 78
+  s_00686901a23f3a::t_33f296753c4020 17-20,23-26,29-32,35-38,41-44,47-50,53,59,61-65,67-70,97
+inc/customizer.php
+  s_00686901a23f3a::t_3dd833f9633cde 261,270-273
+  s_00686901a23f3a::t_a83745d8ec5ca7 3
+  s_00686901a23f3a::t_61758de446b475 188-236
+  s_00686901a23f3a::t_b184c40190f3c7 274-275
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "b1e4a3a6207f3993c188fa5770d4c1e2c5df249d",
+  "prompts": {},
+  "sessions": {
+    "s_00686901a23f3a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "eb6b9f0c-327e-4384-9388-d28c76c149ab",
+        "model": "default"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
