@@ -1,0 +1,19 @@
+template-parts/ecouter.php
+  s_00686901a23f3a::t_7accf2b5e31bdd 55-58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "3be332d39ff8731106d1a0a36c0e733409483fc0",
+  "prompts": {},
+  "sessions": {
+    "s_00686901a23f3a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "eb6b9f0c-327e-4384-9388-d28c76c149ab",
+        "model": "default"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
