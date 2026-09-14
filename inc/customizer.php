@@ -221,7 +221,7 @@ function refoulement_reglages() {
 			'description' => __( 'URL de la playlist ou de la chaîne.', 'refoulement' ),
 		),
 		'refoulement_ecouter_deezer'   => array(
-			'defaut'      => '',
+			'defaut'      => 'https://www.deezer.com/show/1003573932',
 			'label'       => __( 'Deezer', 'refoulement' ),
 			'type'        => 'url',
 			'section'     => 'refoulement_ecouter',
