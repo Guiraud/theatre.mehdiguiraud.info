@@ -1,0 +1,38 @@
+inc/template-tags.php
+  s_714f39f6a0ff16::t_2014cedbd94a24 197-265
+  s_714f39f6a0ff16::t_0fead15504193b 196
+template-parts/couverture.php
+  s_00686901a23f3a::t_2572a77ca3de5f 67-68
+assets/css/theme.css
+  s_00686901a23f3a::t_4dfb2c2669e03e 1171-1189
+style.css
+  s_00686901a23f3a::t_ec75ef2a6669d4 7
+template-parts/ecouter.php
+  s_00686901a23f3a::t_3c819f4f29f698 6-9,16,18-19,22-46,48-49,51-52
+functions.php
+  s_00686901a23f3a::t_5265d37d434255 10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "6d05a5e699f9295f257e5df13a9e82ed18822017",
+  "prompts": {},
+  "sessions": {
+    "s_00686901a23f3a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "eb6b9f0c-327e-4384-9388-d28c76c149ab",
+        "model": "default"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    },
+    "s_714f39f6a0ff16": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "64bb8148-fb7a-4fd6-a54c-06fda916f210",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
