@@ -56,6 +56,10 @@ if ( '' === $refoulement_plateformes['spotify']['url'] ) {
 	$refoulement_plateformes['spotify']['url'] = 'https://open.spotify.com/show/7sKjKaoeWA5cSevsv90Moy';
 }
 
+if ( '' === $refoulement_plateformes['apple']['url'] ) {
+	$refoulement_plateformes['apple']['url'] = 'https://podcasts.apple.com/fr/podcast/le-refoulement-de-freud/id6811654704';
+}
+
 if ( '' === $refoulement_plateformes['youtube']['url'] ) {
 	$refoulement_plateformes['youtube']['url'] = 'https://www.youtube.com/playlist?list=PLU9lfNmykraI';
 }

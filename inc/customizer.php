@@ -207,7 +207,7 @@ function refoulement_reglages() {
 			'description' => __( 'URL de la fiche show (open.spotify.com/show/…). Laissée vide, le badge disparaît.', 'refoulement' ),
 		),
 		'refoulement_ecouter_apple'    => array(
-			'defaut'      => '',
+			'defaut'      => 'https://podcasts.apple.com/fr/podcast/le-refoulement-de-freud/id6811654704',
 			'label'       => __( 'Apple Podcasts', 'refoulement' ),
 			'type'        => 'url',
 			'section'     => 'refoulement_ecouter',
