@@ -1,6 +1,6 @@
 <?php
 /**
- * Outil de personnalisation : couverture d'accueil et bandeau d'inscription.
+ * Outil de personnalisation : couverture, écoute podcast et bandeau d'inscription.
  *
  * @package Refoulement
  */
@@ -185,6 +185,55 @@ function refoulement_reglages() {
 			'type'    => 'email',
 			'section' => 'refoulement_lettre',
 		),
+
+		// Bandeau d'écoute podcast.
+		'refoulement_ecouter_titre'    => array(
+			'defaut'  => __( 'Écouter « Le refoulement de Freud »', 'refoulement' ),
+			'label'   => __( 'Titre du bandeau', 'refoulement' ),
+			'type'    => 'text',
+			'section' => 'refoulement_ecouter',
+		),
+		'refoulement_ecouter_chapo'    => array(
+			'defaut'  => __( 'Retrouvez et suivez l’enquête sur votre application préférée.', 'refoulement' ),
+			'label'   => __( 'Chapô', 'refoulement' ),
+			'type'    => 'textarea',
+			'section' => 'refoulement_ecouter',
+		),
+		'refoulement_ecouter_spotify'  => array(
+			'defaut'      => '',
+			'label'       => __( 'Spotify', 'refoulement' ),
+			'type'        => 'url',
+			'section'     => 'refoulement_ecouter',
+			'description' => __( 'URL de la fiche show (open.spotify.com/show/…). Laissée vide, le badge disparaît.', 'refoulement' ),
+		),
+		'refoulement_ecouter_apple'    => array(
+			'defaut'      => '',
+			'label'       => __( 'Apple Podcasts', 'refoulement' ),
+			'type'        => 'url',
+			'section'     => 'refoulement_ecouter',
+			'description' => __( 'URL de la fiche podcast (podcasts.apple.com/…/id…).', 'refoulement' ),
+		),
+		'refoulement_ecouter_youtube'  => array(
+			'defaut'      => '',
+			'label'       => __( 'YouTube', 'refoulement' ),
+			'type'        => 'url',
+			'section'     => 'refoulement_ecouter',
+			'description' => __( 'URL de la playlist ou de la chaîne.', 'refoulement' ),
+		),
+		'refoulement_ecouter_deezer'   => array(
+			'defaut'      => '',
+			'label'       => __( 'Deezer', 'refoulement' ),
+			'type'        => 'url',
+			'section'     => 'refoulement_ecouter',
+			'description' => __( 'URL de la fiche show (deezer.com/show/…).', 'refoulement' ),
+		),
+		'refoulement_ecouter_rss'      => array(
+			'defaut'      => 'https://www.vodio.fr/rssmedias-2729.xml',
+			'label'       => __( 'Flux RSS', 'refoulement' ),
+			'type'        => 'url',
+			'section'     => 'refoulement_ecouter',
+			'description' => __( 'Flux Vodio ou autre agrégateur. Par défaut : flux Vodio du dossier.', 'refoulement' ),
+		),
 	);
 }
 
@@ -209,13 +258,19 @@ function refoulement_reglage( $cle ) {
 function refoulement_customize_register( $wp_customize ) {
 	$wp_customize->add_panel( 'refoulement', array(
 		'title'       => __( 'Le Refoulement de Freud', 'refoulement' ),
-		'description' => __( 'Couverture d’accueil et bandeau d’inscription.', 'refoulement' ),
+		'description' => __( 'Couverture d’accueil, écoute podcast et bandeau d’inscription.', 'refoulement' ),
 		'priority'    => 20,
 	) );
 
 	$wp_customize->add_section( 'refoulement_couverture', array(
 		'title' => __( 'Couverture d’accueil', 'refoulement' ),
 		'panel' => 'refoulement',
+	) );
+
+	$wp_customize->add_section( 'refoulement_ecouter', array(
+		'title'       => __( 'Écouter le podcast', 'refoulement' ),
+		'description' => __( 'Liens de souscription multi-plateformes. Un badge n’apparaît que si son adresse est renseignée.', 'refoulement' ),
+		'panel'       => 'refoulement',
 	) );
 
 	$wp_customize->add_section( 'refoulement_lettre', array(

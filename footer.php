@@ -9,6 +9,8 @@ defined( 'ABSPATH' ) || exit;
 ?>
 	</main><!-- .site__contenu -->
 
+	<?php get_template_part( 'template-parts/ecouter' ); ?>
+
 	<footer class="pied">
 		<div class="pied__interieur">
 			<div class="pied__colonne">

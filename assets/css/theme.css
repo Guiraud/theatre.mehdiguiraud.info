@@ -13,6 +13,7 @@
    9.  Portrait (1h redécliné)
    10. Contenu éditorial et compositions
    11. Bandeau d'inscription
+   11b. Écouter le podcast
    12. Navigation secondaire, pagination, commentaires
    13. Pied de page
    14. Adaptations petit écran (1i)
@@ -1097,6 +1098,76 @@ p {
 	color: var(--tirage);
 }
 
+/* 11b. Écouter le podcast ------------------------------------------------- */
+
+.ecouter {
+	background: var(--gris-preuve);
+	color: var(--tirage);
+	border-top: 1px solid var(--filet-nuit);
+}
+
+.ecouter__interieur {
+	width: 100%;
+	max-width: calc(var(--colonne-lecture) + 2 * var(--gouttiere-lecture));
+	margin-inline: auto;
+	padding: 44px var(--gouttiere);
+}
+
+.ecouter__titre {
+	margin: 8px 0 0;
+	font: 700 26px/1.2 var(--f-titre);
+	text-transform: uppercase;
+	color: var(--tirage);
+}
+
+.ecouter__chapo {
+	margin: 12px 0 0;
+	max-width: 42rem;
+	font: 400 16px/1.55 var(--f-corps);
+	color: rgba(242, 239, 232, .78);
+}
+
+.ecouter__liens {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin: 24px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ecouter__badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 18px;
+	border: 1px solid transparent;
+	font: 500 13px/1 var(--f-etiquette);
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #fff;
+	transition: opacity .15s ease, transform .15s ease;
+}
+
+.ecouter__badge:hover,
+.ecouter__badge:focus {
+	opacity: .92;
+	color: #fff;
+	transform: translateY(-1px);
+}
+
+.ecouter__icone {
+	flex-shrink: 0;
+	fill: currentColor;
+}
+
+.ecouter__badge--spotify { background: #1DB954; }
+.ecouter__badge--apple   { background: #872EC4; }
+.ecouter__badge--youtube { background: #FF0000; }
+.ecouter__badge--deezer  { background: #A238FF; }
+.ecouter__badge--rss     { background: #F26522; }
+
 /* 12. Navigation secondaire, pagination, commentaires --------------------- */
 
 .navigation-pieces {
@@ -1473,6 +1544,7 @@ p {
 @media print {
 	.bandeau,
 	.lettre,
+	.ecouter,
 	.pied,
 	.navigation-pieces,
 	.lien-evitement {
