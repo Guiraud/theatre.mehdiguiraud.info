@@ -64,6 +64,8 @@ $refoulement_compteurs   = refoulement_compteurs();
 			<span class="ecran-lecteur"> <?php echo esc_html( (string) refoulement_reglage( 'refoulement_titre_verso' ) ); ?></span>
 		</h1>
 
+		<?php get_template_part( 'template-parts/ecouter', null, array( 'variante' => 'couverture' ) ); ?>
+
 		<?php if ( $refoulement_compteurs ) : ?>
 			<dl class="compteurs">
 				<?php foreach ( $refoulement_compteurs as $refoulement_compteur ) : ?>

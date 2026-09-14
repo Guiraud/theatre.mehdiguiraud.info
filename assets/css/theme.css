@@ -1168,6 +1168,25 @@ p {
 .ecouter__badge--deezer  { background: #A238FF; }
 .ecouter__badge--rss     { background: #F26522; }
 
+/* Variante compacte sous le titre de couverture (bande rouge). */
+.ecouter--couverture {
+	background: transparent;
+	border: 0;
+	margin: 22px 0 0;
+	color: inherit;
+}
+
+.ecouter--couverture .ecouter__liens {
+	margin: 0;
+	gap: 8px;
+}
+
+.ecouter--couverture .ecouter__badge {
+	padding: 8px 12px;
+	font-size: 11px;
+	letter-spacing: .08em;
+}
+
 /* 12. Navigation secondaire, pagination, commentaires --------------------- */
 
 .navigation-pieces {

@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'REFOULEMENT_VERSION', '1.1.4' );
+define( 'REFOULEMENT_VERSION', '1.1.5' );
 define( 'REFOULEMENT_DIR', get_template_directory() );
 define( 'REFOULEMENT_URI', get_template_directory_uri() );
 
