@@ -56,6 +56,10 @@ if ( '' === $refoulement_plateformes['spotify']['url'] ) {
 	$refoulement_plateformes['spotify']['url'] = 'https://open.spotify.com/show/7sKjKaoeWA5cSevsv90Moy';
 }
 
+if ( '' === $refoulement_plateformes['youtube']['url'] ) {
+	$refoulement_plateformes['youtube']['url'] = 'https://www.youtube.com/playlist?list=PLU9lfNmykraI';
+}
+
 if ( '' === $refoulement_plateformes['deezer']['url'] ) {
 	$refoulement_plateformes['deezer']['url'] = 'https://www.deezer.com/show/1003573932';
 }

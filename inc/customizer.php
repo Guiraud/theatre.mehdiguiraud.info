@@ -214,7 +214,7 @@ function refoulement_reglages() {
 			'description' => __( 'URL de la fiche podcast (podcasts.apple.com/…/id…).', 'refoulement' ),
 		),
 		'refoulement_ecouter_youtube'  => array(
-			'defaut'      => '',
+			'defaut'      => 'https://www.youtube.com/playlist?list=PLU9lfNmykraI',
 			'label'       => __( 'YouTube', 'refoulement' ),
 			'type'        => 'url',
 			'section'     => 'refoulement_ecouter',
