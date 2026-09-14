@@ -52,6 +52,10 @@ $refoulement_plateformes = array(
 );
 
 // Repli : si le Customizer a enregistré une chaîne vide, le défaut WP disparaît.
+if ( '' === $refoulement_plateformes['deezer']['url'] ) {
+	$refoulement_plateformes['deezer']['url'] = 'https://www.deezer.com/show/1003573932';
+}
+
 if ( '' === $refoulement_plateformes['rss']['url'] ) {
 	$refoulement_plateformes['rss']['url'] = 'https://www.vodio.fr/rssmedias-2729.xml';
 }
