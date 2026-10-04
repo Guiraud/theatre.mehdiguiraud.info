@@ -59,6 +59,4 @@ if ( $refoulement_pieces->have_posts() ) :
 	<?php
 endif;
 
-get_template_part( 'template-parts/lettre' );
-
 get_footer();

@@ -18,4 +18,6 @@ require_once REFOULEMENT_DIR . '/inc/meta.php';
 require_once REFOULEMENT_DIR . '/inc/template-tags.php';
 require_once REFOULEMENT_DIR . '/inc/queries.php';
 require_once REFOULEMENT_DIR . '/inc/customizer.php';
+require_once REFOULEMENT_DIR . '/inc/footer.php';
+require_once REFOULEMENT_DIR . '/inc/newsletter.php';
 require_once REFOULEMENT_DIR . '/inc/patterns.php';

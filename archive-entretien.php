@@ -54,6 +54,5 @@ $refoulement_objet = get_post_type_object( 'entretien' );
 </div>
 
 <?php
-get_template_part( 'template-parts/lettre' );
 
 get_footer();

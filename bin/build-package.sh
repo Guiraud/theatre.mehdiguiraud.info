@@ -41,6 +41,7 @@ rsync -a \
 	--exclude '.continues-handoff.md' \
 	--exclude '.mcp_memory/' \
 	--exclude 'dist/' \
+	--exclude '.worktrees/' \
 	--exclude 'bin/' \
 	--exclude 'docs/' \
 	--exclude 'tests/' \

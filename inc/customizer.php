@@ -197,6 +197,13 @@ function refoulement_reglages() {
 			'type'    => 'text',
 			'section' => 'refoulement_lettre',
 		),
+		'refoulement_lettre_page_id'   => array(
+			'defaut'      => 0,
+			'label'       => __( 'Page dédiée à la newsletter', 'refoulement' ),
+			'type'        => 'page',
+			'section'     => 'refoulement_lettre',
+			'description' => __( 'Destination du lien « S’inscrire à la newsletter » du pied de page. Seule une page publiée est utilisée ; sans page désignée, le lien mène au formulaire hébergé par Brevo, puis à défaut au bandeau de l’accueil.', 'refoulement' ),
+		),
 		'refoulement_lettre_contact'   => array(
 			'defaut'  => '',
 			'label'   => __( 'Adresse de contact (repli)', 'refoulement' ),
@@ -267,6 +274,15 @@ function refoulement_reglages() {
 			'section'     => 'refoulement_ecouter',
 			'description' => __( 'Flux Vodio ou autre agrégateur. Par défaut : flux Vodio du dossier.', 'refoulement' ),
 		),
+
+		// Pied de page.
+		'refoulement_mentions_legales_page_id' => array(
+			'defaut'      => 0,
+			'label'       => __( 'Page des mentions légales', 'refoulement' ),
+			'type'        => 'page',
+			'section'     => 'refoulement_pied',
+			'description' => __( 'Seule une page publiée est affichée dans le pied de page.', 'refoulement' ),
+		),
 	);
 }
 
@@ -316,6 +332,11 @@ function refoulement_customize_register( $wp_customize ) {
 		'panel' => 'refoulement',
 	) );
 
+	$wp_customize->add_section( 'refoulement_pied', array(
+		'title' => __( 'Pied de page', 'refoulement' ),
+		'panel' => 'refoulement',
+	) );
+
 	foreach ( refoulement_reglages() as $cle => $reglage ) {
 		$sanitize = 'sanitize_text_field';
 
@@ -336,6 +357,7 @@ function refoulement_customize_register( $wp_customize ) {
 				$sanitize = 'sanitize_email';
 				break;
 			case 'image':
+			case 'page':
 				$sanitize = 'absint';
 				break;
 		}
@@ -366,6 +388,7 @@ function refoulement_customize_register( $wp_customize ) {
 				'textarea'          => 'textarea',
 				'url', 'brevo_url'  => 'url',
 				'brevo_form_id'     => 'number',
+				'page'              => 'dropdown-pages',
 				default             => $reglage['type'],
 			},
 		) );
