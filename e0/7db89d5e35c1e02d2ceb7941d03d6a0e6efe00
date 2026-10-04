@@ -1,0 +1,53 @@
+assets/css/theme.css
+  s_2629ed39ce1cf9::t_1eb28845fc1386 962,1474-1475,1482-1485,1489-1531,1568-1573,1749-1750
+  s_2629ed39ce1cf9::t_07825caf86607c 1751-1752
+docs/content/confidentialite.html
+  s_2629ed39ce1cf9::t_1eb28845fc1386 1-30
+bin/build-package.sh
+  s_2629ed39ce1cf9::t_1eb28845fc1386 44
+tests/test-newsletter-embed.php
+  s_2629ed39ce1cf9::t_1eb28845fc1386 82-85,104-111,150-194,216,218
+docs/content/mentions-legales.html
+  s_2629ed39ce1cf9::t_1eb28845fc1386 1-18
+inc/customizer.php
+  s_2629ed39ce1cf9::t_4eeb346ecc3e16 277
+  s_2629ed39ce1cf9::t_1eb28845fc1386 200-206,278-285,335-339,360,391
+docs/plans/2026-08-28-accessibilite-mentions-legales-pied-page.md
+  s_2629ed39ce1cf9::t_1eb28845fc1386 1-624
+inc/newsletter.php
+  s_2629ed39ce1cf9::t_1eb28845fc1386 1-302
+tests/test-footer.php
+  s_2629ed39ce1cf9::t_16661a40eeb7d7 133-136
+  s_2629ed39ce1cf9::t_1eb28845fc1386 1-132,137-409
+page-lettre.php
+  s_2629ed39ce1cf9::t_1eb28845fc1386 1-42
+README.md
+  s_2629ed39ce1cf9::t_1eb28845fc1386 128-131,134-202
+  s_2629ed39ce1cf9::t_20af3a77d9bb58 203
+template-parts/bandeau-nav.php
+  s_2629ed39ce1cf9::t_1eb28845fc1386 38,44
+template-parts/lettre.php
+  s_2629ed39ce1cf9::t_1eb28845fc1386 42,52
+footer.php
+  s_2629ed39ce1cf9::t_1eb28845fc1386 9-14,22,30-45,62-70
+inc/footer.php
+  s_2629ed39ce1cf9::t_1eb28845fc1386 1-106
+functions.php
+  s_2629ed39ce1cf9::t_1eb28845fc1386 21-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "e07db89d5e35c1e02d2ceb7941d03d6a0e6efe00",
+  "prompts": {},
+  "sessions": {
+    "s_2629ed39ce1cf9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c4b9c2f8-b69b-4af0-b596-a54dae7bec79",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
