@@ -1,6 +1,6 @@
 <?php
 /**
- * Outil de personnalisation : couverture, écoute podcast et bandeau d'inscription.
+ * Outil de personnalisation : couverture, carrousel vidéo, écoute podcast et bandeau d'inscription.
  *
  * @package Refoulement
  */
@@ -46,6 +46,24 @@ function refoulement_sanitize_brevo_form_id( $valeur ) {
 	$id = filter_var( $valeur, FILTER_VALIDATE_INT );
 
 	return ( false !== $id && $id > 0 ) ? $id : 0;
+}
+
+/**
+ * Liste par défaut du carrousel : épisodes et shorts publiés de Violaine de
+ * Filippis-Abate et de Jeffrey Moussaieff Masson.
+ *
+ * @return string Une ligne « adresse|titre » par vidéo.
+ */
+function refoulement_videos_defaut() {
+	return implode( "\n", array(
+		'https://www.youtube.com/watch?v=qBjk-VDbPoI|' . __( 'Épisode 2 — Violaine de Filippis-Abate', 'refoulement' ),
+		'https://www.youtube.com/watch?v=NTRPH8KPHko|' . __( 'Épisode 1 — Jeffrey Moussaieff Masson', 'refoulement' ),
+		'https://www.youtube.com/shorts/0tZJnGzqT3A|' . __( 'L’aveu du psychiatre de Marilyn Monroe', 'refoulement' ),
+		'https://www.youtube.com/shorts/IfjCtlc_ZbI|' . __( 'Shoah et psychanalyse : la mécanique du déni', 'refoulement' ),
+		'https://www.youtube.com/shorts/z8FIOB2E9as|' . __( 'L’erreur de Freud qui a tout gâché', 'refoulement' ),
+		'https://www.youtube.com/shorts/a2EdPRRmkqM|' . __( 'Pourquoi ont-ils étouffé la vérité ?', 'refoulement' ),
+		'https://www.youtube.com/shorts/s5egasOnoPg|' . __( '1896 : Freud fait le lien entre hystéries et VSS', 'refoulement' ),
+	) );
 }
 
 /**
@@ -186,6 +204,21 @@ function refoulement_reglages() {
 			'section' => 'refoulement_lettre',
 		),
 
+		// Carrousel vidéo de l'accueil.
+		'refoulement_videos_titre'     => array(
+			'defaut'  => __( 'Les entretiens en images', 'refoulement' ),
+			'label'   => __( 'Titre du carrousel', 'refoulement' ),
+			'type'    => 'text',
+			'section' => 'refoulement_videos',
+		),
+		'refoulement_videos_liste'     => array(
+			'defaut'      => refoulement_videos_defaut(),
+			'label'       => __( 'Vidéos YouTube', 'refoulement' ),
+			'type'        => 'textarea',
+			'section'     => 'refoulement_videos',
+			'description' => __( 'Une ligne par vidéo, au format « adresse|titre ». Adresses youtube.com/watch, youtube.com/shorts ou youtu.be. Les shorts s’affichent en vertical. Liste vide : le carrousel disparaît.', 'refoulement' ),
+		),
+
 		// Bandeau d'écoute podcast.
 		'refoulement_ecouter_titre'    => array(
 			'defaut'  => __( 'Écouter « Le refoulement de Freud »', 'refoulement' ),
@@ -258,7 +291,7 @@ function refoulement_reglage( $cle ) {
 function refoulement_customize_register( $wp_customize ) {
 	$wp_customize->add_panel( 'refoulement', array(
 		'title'       => __( 'Le Refoulement de Freud', 'refoulement' ),
-		'description' => __( 'Couverture d’accueil, écoute podcast et bandeau d’inscription.', 'refoulement' ),
+		'description' => __( 'Couverture d’accueil, carrousel vidéo, écoute podcast et bandeau d’inscription.', 'refoulement' ),
 		'priority'    => 20,
 	) );
 
@@ -271,6 +304,11 @@ function refoulement_customize_register( $wp_customize ) {
 		'title'       => __( 'Écouter le podcast', 'refoulement' ),
 		'description' => __( 'Liens de souscription multi-plateformes. Un badge n’apparaît que si son adresse est renseignée.', 'refoulement' ),
 		'panel'       => 'refoulement',
+	) );
+
+	$wp_customize->add_section( 'refoulement_videos', array(
+		'title' => __( 'Carrousel vidéo', 'refoulement' ),
+		'panel' => 'refoulement',
 	) );
 
 	$wp_customize->add_section( 'refoulement_lettre', array(
@@ -360,4 +398,35 @@ function refoulement_compteurs() {
 	}
 
 	return array_slice( $compteurs, 0, 3 );
+}
+
+/**
+ * Découpe le réglage « vidéos » en entrées YouTube exploitables.
+ *
+ * Les lignes dont l'adresse n'est pas reconnue sont ignorées.
+ *
+ * @return array<int, array{id:string, titre:string, url:string, format:string}>
+ */
+function refoulement_videos() {
+	$lignes = preg_split( '/\R/', (string) refoulement_reglage( 'refoulement_videos_liste' ) );
+	$videos = array();
+
+	foreach ( (array) $lignes as $ligne ) {
+		$parties = array_map( 'trim', explode( '|', trim( $ligne ), 2 ) );
+
+		if ( ! preg_match( '~^https?://(?:www\.|m\.)?(?:youtube\.com/(?:watch\?(?:.*&)?v=|shorts/)|youtu\.be/)([A-Za-z0-9_-]{11})~', $parties[0], $m ) ) {
+			continue;
+		}
+
+		$format = str_contains( $parties[0], '/shorts/' ) ? 'portrait' : 'paysage';
+
+		$videos[] = array(
+			'id'     => $m[1],
+			'titre'  => isset( $parties[1] ) && '' !== $parties[1] ? $parties[1] : __( 'Vidéo', 'refoulement' ),
+			'url'    => 'portrait' === $format ? 'https://www.youtube.com/shorts/' . $m[1] : 'https://www.youtube.com/watch?v=' . $m[1],
+			'format' => $format,
+		);
+	}
+
+	return $videos;
 }

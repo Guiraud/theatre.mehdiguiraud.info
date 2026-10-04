@@ -1,6 +1,6 @@
 <?php
 /**
- * Accueil — option 3a : couverture déchirée, puis dossier papier tramé.
+ * Accueil — option 3a : couverture déchirée, carrousel vidéo, puis dossier papier tramé.
  *
  * Si une page statique est définie comme page d'accueil et qu'elle contient du
  * texte, celui-ci est affiché entre la couverture et la grille des pièces.
@@ -28,6 +28,8 @@ if ( is_page() && '' !== trim( (string) get_post_field( 'post_content', get_quer
 	</div>
 	<?php
 endif;
+
+get_template_part( 'template-parts/videos' );
 
 $refoulement_pieces = refoulement_dernieres_pieces( 3 );
 
