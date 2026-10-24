@@ -1,0 +1,19 @@
+bin/deploy-search-console.yml
+  s_05add6ba07de9d::t_bc3e2350b72cb2 1-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "6e4241fe8eac15060d3c40bae43f8572c212d9a2",
+  "prompts": {},
+  "sessions": {
+    "s_05add6ba07de9d": {
+      "agent_id": {
+        "tool": "antigravity",
+        "id": "75a31114-7e39-49bf-a619-82e9eeb66964",
+        "model": "gemini-3.8-flash-medium"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
