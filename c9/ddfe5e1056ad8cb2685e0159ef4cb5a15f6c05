@@ -1,0 +1,19 @@
+docs/conformite-meta.md
+  s_09c97a97a57062::t_779b200795f67c 1-100
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "c9ddfe5e1056ad8cb2685e0159ef4cb5a15f6c05",
+  "prompts": {},
+  "sessions": {
+    "s_09c97a97a57062": {
+      "agent_id": {
+        "tool": "antigravity",
+        "id": "c54a70d1-91da-4326-85b3-b91d1d47581b",
+        "model": "gemini-3.8-flash-high"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
