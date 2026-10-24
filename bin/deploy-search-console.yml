@@ -1,0 +1,35 @@
+---
+- name: Déploiement du fichier Google Search Console sur le serveur OVH
+  hosts: all
+  gather_facts: false
+  vars:
+    web_root: "/home/mehdiguid/theatre"
+    theme_dir: "/home/mehdiguid/theatre/wp-content/themes/refoulement"
+    verification_file: "google8a0d27bc313a0a0e.html"
+    verification_content_b64: "Z29vZ2xlLXNpdGUtdmVyaWZpY2F0aW9uOiBnb29nbGU4YTBkMjdiYzMxM2EwYTBlLmh0bWw="
+    functions_php_b64: "PD9waHAKLyoqCiAqIExlIFJlZm91bGVtZW50IGRlIEZyZXVkIOKAlCBhbW9yw6dhZ2UgZHUgdGjDqG1lLgogKgogKiBAcGFja2FnZSBSZWZvdWxlbWVudAogKi8KCmRlZmluZWQoICdBQlNQQVRIJyApIHx8IGV4aXQ7CgpkZWZpbmUoICdSRUZPVUxFTUVOVF9WRVJTSU9OJywgJzEuMS41JyApOwpkZWZpbmUoICdSRUZPVUxFTUVOVF9ESVInLCBnZXRfdGVtcGxhdGVfZGlyZWN0b3J5KCkgKTsKZGVmaW5lKCAnUkVGT1VMRU1FTlRfVVJJJywgZ2V0X3RlbXBsYXRlX2RpcmVjdG9yeV91cmkoKSApOwoKcmVxdWlyZV9vbmNlIFJFRk9VTEVNRU5UX0RJUiAuICcvaW5jL3NldHVwLnBocCc7CnJlcXVpcmVfb25jZSBSRUZPVUxFTUVOVF9ESVIgLiAnL2luYy9lbnF1ZXVlLnBocCc7CnJlcXVpcmVfb25jZSBSRUZPVUxFTUVOVF9ESVIgLiAnL2luYy9wb3N0LXR5cGVzLnBocCc7CnJlcXVpcmVfb25jZSBSRUZPVUxFTUVOVF9ESVIgLiAnL2luYy9tZXRhLnBocCc7CnJlcXVpcmVfb25jZSBSRUZPVUxFTUVOVF9ESVIgLiAnL2luYy90ZW1wbGF0ZS10YWdzLnBocCc7CnJlcXVpcmVfb25jZSBSRUZPVUxFTUVOVF9ESVIgLiAnL2luYy9xdWVyaWVzLnBocCc7CnJlcXVpcmVfb25jZSBSRUZPVUxFTUVOVF9ESVIgLiAnL2luYy9jdXN0b21pemVyLnBocCc7CnJlcXVpcmVfb25jZSBSRUZPVUxFTUVOVF9ESVIgLiAnL2luYy9mb290ZXIucGhwJzsKcmVxdWlyZV9vbmNlIFJFRk9VTEVNRU5UX0RJUiAuICcvaW5jL25ld3NsZXR0ZXIucGhwJzsKcmVxdWlyZV9vbmNlIFJFRk9VTEVNRU5UX0RJUiAuICcvaW5jL3BhdHRlcm5zLnBocCc7CnJlcXVpcmVfb25jZSBSRUZPVUxFTUVOVF9ESVIgLiAnL2luYy9zZW8ucGhwJzsK"
+    seo_php_b64: "PD9waHAKLyoqCiAqIEludMOpZ3JhdGlvbiBTRU8gZXQgdmFsaWRhdGlvbiBwb3VyIGxlcyBvdXRpbHMgd2VibWVzdHJlIChHb29nbGUgU2VhcmNoIENvbnNvbGUpLgogKgogKiBAcGFja2FnZSBSZWZvdWxlbWVudAogKi8KCmRlZmluZWQoICdBQlNQQVRIJyApIHx8IGV4aXQ7CgovKioKICogUsOpcG9uZCBhdSBmaWNoaWVyIGRlIHbDqXJpZmljYXRpb24gR29vZ2xlIFNlYXJjaCBDb25zb2xlIHNpIGludGVyY2VwdMOpIHBhciBXb3JkUHJlc3MuCiAqLwpmdW5jdGlvbiByZWZvdWxlbWVudF9nb29nbGVfc2VhcmNoX2NvbnNvbGVfZmlsZSgpIHsKCWlmICggaXNzZXQoICRfU0VSVkVSWydSRVFVRVNUX1VSSSddICkgJiYgZmFsc2UgIT09IHN0cnBvcyggJF9TRVJWRVJbJ1JFUVVFU1RfVVJJJ10sICdnb29nbGU4YTBkMjdiYzMxM2EwYTBlLmh0bWwnICkgKSB7CgkJc3RhdHVzX2hlYWRlciggMjAwICk7CgkJaGVhZGVyKCAnQ29udGVudC1UeXBlOiB0ZXh0L2h0bWw7IGNoYXJzZXQ9dXRmLTgnICk7CgkJZWNobyAiZ29vZ2xlLXNpdGUtdmVyaWZpY2F0aW9uOiBnb29nbGU4YTBkMjdiYzMxM2EwYTBlLmh0bWxcbiI7CgkJZXhpdDsKCX0KfQphZGRfYWN0aW9uKCAnaW5pdCcsICdyZWZvdWxlbWVudF9nb29nbGVfc2VhcmNoX2NvbnNvbGVfZmlsZScgKTsKCi8qKgogKiBCYWxpc2UgbWV0YSBkZSB2w6lyaWZpY2F0aW9uIHBvdXIgR29vZ2xlIFNlYXJjaCBDb25zb2xlLgogKi8KZnVuY3Rpb24gcmVmb3VsZW1lbnRfZ29vZ2xlX3NlYXJjaF9jb25zb2xlX21ldGEoKSB7CgllY2hvICc8bWV0YSBuYW1lPSJnb29nbGUtc2l0ZS12ZXJpZmljYXRpb24iIGNvbnRlbnQ9IjhhMGQyN2JjMzEzYTBhMGUiPicgLiAiXG4iOwp9CmFkZF9hY3Rpb24oICd3cF9oZWFkJywgJ3JlZm91bGVtZW50X2dvb2dsZV9zZWFyY2hfY29uc29sZV9tZXRhJywgMSApOwo="
+
+  tasks:
+    - name: Déposer le fichier de vérification à la racine web
+      ansible.builtin.raw: "echo '{{ verification_content_b64 }}' | base64 -d > {{ web_root }}/{{ verification_file }}"
+
+    - name: Déposer le fichier de vérification dans le thème
+      ansible.builtin.raw: "echo '{{ verification_content_b64 }}' | base64 -d > {{ theme_dir }}/{{ verification_file }}"
+
+    - name: Déployer inc/seo.php dans le thème
+      ansible.builtin.raw: "echo '{{ seo_php_b64 }}' | base64 -d > {{ theme_dir }}/inc/seo.php"
+
+    - name: Mettre à jour functions.php dans le thème
+      ansible.builtin.raw: "echo '{{ functions_php_b64 }}' | base64 -d > {{ theme_dir }}/functions.php"
+
+    - name: Ajuster les permissions
+      ansible.builtin.raw: "chmod 644 {{ web_root }}/{{ verification_file }} {{ theme_dir }}/{{ verification_file }} {{ theme_dir }}/inc/seo.php {{ theme_dir }}/functions.php"
+
+    - name: Vérifier la présence et le contenu du fichier racine
+      ansible.builtin.raw: "cat {{ web_root }}/{{ verification_file }}"
+      register: cat_output
+
+    - name: Afficher le résultat du fichier déployé
+      ansible.builtin.debug:
+        var: cat_output.stdout
