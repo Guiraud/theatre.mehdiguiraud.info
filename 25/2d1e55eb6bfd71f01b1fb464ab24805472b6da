@@ -1,0 +1,19 @@
+google8a0d27bc313a0a0e.html
+  s_05add6ba07de9d::t_8842fa0b55b54b 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "development:1.7.1",
+  "base_commit_sha": "252d1e55eb6bfd71f01b1fb464ab24805472b6da",
+  "prompts": {},
+  "sessions": {
+    "s_05add6ba07de9d": {
+      "agent_id": {
+        "tool": "antigravity",
+        "id": "75a31114-7e39-49bf-a619-82e9eeb66964",
+        "model": "gemini-3.8-flash-medium"
+      },
+      "human_author": "Guiraud <mehdi.guiraud@gmail.com>"
+    }
+  }
+}
