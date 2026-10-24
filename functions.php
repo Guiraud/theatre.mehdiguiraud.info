@@ -21,3 +21,4 @@ require_once REFOULEMENT_DIR . '/inc/customizer.php';
 require_once REFOULEMENT_DIR . '/inc/footer.php';
 require_once REFOULEMENT_DIR . '/inc/newsletter.php';
 require_once REFOULEMENT_DIR . '/inc/patterns.php';
+require_once REFOULEMENT_DIR . '/inc/seo.php';
